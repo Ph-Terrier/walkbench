@@ -1,0 +1,2 @@
+# Pinned files are stored and checked out byte for byte (SHA-256 of the manifest)
+inst/pinned/** -text

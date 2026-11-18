@@ -1,0 +1,6 @@
+^LICENSE\.md$
+^\.gitattributes$
+^CITATION\.cff$
+^\.zenodo\.json$
+^\.gitignore$
+^docs$

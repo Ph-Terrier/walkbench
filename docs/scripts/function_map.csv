@@ -1,0 +1,61 @@
+function,part,chapter
+model_m1,models,m1
+list_models,models,m1
+model_m2,models,m2
+simaci_input,perturbation port,port
+input_iid_uniform,perturbation port,port
+input_arfima,perturbation port,port
+input_fixed_series,perturbation port,port
+seed_surrogate,perturbation port,port
+input_surrogate,perturbation port,port
+check_input,perturbation port,port
+simulate_run,runs and trials,runs
+trim_run,runs and trials,runs
+transient_cycles,runs and trials,runs
+transient_from_radius,runs and trials,runs
+run_trial,runs and trials,runs
+draw_single_seed,runs and trials,runs
+draw_fixed,runs and trials,runs
+seed_campaign,runs and trials,runs
+check_master_seeds,runs and trials,runs
+linearize,linearization,lin
+make_metronome,closed-loop port,loop
+make_controller_h3a,closed-loop port,loop
+make_controller_h3b,closed-loop port,loop
+gain_scale,closed-loop port,loop
+closed_loop_matrix,closed-loop port,loop
+closed_loop_radius,closed-loop port,loop
+stable_gain_limit,closed-loop port,loop
+transient_cycles_loop,closed-loop port,loop
+settings_m2,estimators,est
+estimate_divergence,estimators,est
+estimate_floquet,estimators,est
+reference_xstar,estimators,est
+estimate_variability,estimators,est
+dfa_settings,estimators,est
+estimate_dfa,estimators,est
+estimate_all,estimators,est
+campaign_table,campaign rules and run log,camp
+campaign_master,campaign rules and run log,camp
+number_cells,campaign rules and run log,camp
+bootstrap_seed,campaign rules and run log,camp
+check_seed_plan,campaign rules and run log,camp
+bind_trials,campaign rules and run log,camp
+summarize_cells,campaign rules and run log,camp
+check_output_folder,campaign rules and run log,camp
+write_campaign_log,campaign rules and run log,camp
+fi_autocorrelation,analytic predictor,pred
+ar1_autocorrelation,analytic predictor,pred
+centered_autocovariance,analytic predictor,pred
+sample_autocovariance,analytic predictor,pred
+spinal_d_grid,analytic predictor,pred
+predict_spinal_levels,analytic predictor,pred
+spinal_lambda_l_m1,analytic predictor,pred
+spinal_lambda_l_lsq,analytic predictor,pred
+spinal_n_past,analytic predictor,pred
+spinal_settings_m2,analytic predictor,pred
+window_slope_half_log_v,analytic predictor,pred
+match_fi_to_ar1,analytic predictor,pred
+pinned_file,pinned code,repro
+check_pinned_files,pinned code,repro
+load_racing,pinned code,repro

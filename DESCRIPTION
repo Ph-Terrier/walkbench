@@ -1,0 +1,51 @@
+Package: walkbench
+Type: Package
+Title: Testbed of Walking Models for the Divergence Exponents of Gait
+Version: 0.6.2
+Authors@R:
+    person("Philippe", "Terrier", , "philippe.terrier@he-arc.ch",
+           role = c("aut", "cre", "cph"))
+Description: Walking models share a common interface, so that an experiment
+    written for one model runs on the others without change. The interface
+    has a perturbation port that accepts any input series, a closed-loop port
+    for corrective controllers and a metronome, and a linearization at the
+    fixed point. Runs have standardized outputs, and a run driver applies a
+    seed rule, redraws a run after a fall and writes a run log. Common
+    estimators compute the short-term and long-term divergence exponents
+    with the Rosenstein engine of RACING v1.0.2 (Terrier 2026)
+    <doi:10.5281/zenodo.20542521>, the Floquet multipliers, the kinematic
+    variability and the scaling exponent of detrended fluctuation analysis.
+    The package contains two models. M1 is the simplest walking model of
+    Garcia et al. (1998) <doi:10.1115/1.2798313>, perturbed at each foot
+    strike as in Su and Dingwell (2007) <doi:10.1115/1.2800760>. M2 is the
+    walking model with arced feet and a hip spring of Hobbelen and Wisse
+    (2007) <doi:10.1109/TRO.2007.904908>, as used by Bruijn et al. (2012)
+    <doi:10.1016/j.medengphy.2011.07.024>. Its input is the height of the
+    floor at each step. The campaign rules follow the analysis plan of the
+    SIM-ACI project, registered on OSF Registries <doi:10.17605/OSF.IO/M74TK>.
+    They cover the master seeds, the transients, the rescaling of the inputs,
+    the real stride series and their surrogates, and the fall rate of each
+    cell. An analytic predictor gives the expected divergence curve and the
+    long-term exponent from the linearization of a model and the
+    autocovariance of its input.
+License: MIT + file LICENSE
+URL: https://github.com/Ph-Terrier/walkbench
+BugReports: https://github.com/Ph-Terrier/walkbench/issues
+Encoding: UTF-8
+Depends:
+    R (>= 4.5.0)
+Imports:
+    deSolve,
+    digest,
+    jsonlite,
+    MASS,
+    RANN,
+    stats,
+    tools,
+    utils
+Suggests:
+    pkgload,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0

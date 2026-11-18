@@ -1,0 +1,12 @@
+# Files that git does not track in the repository of walkbench.
+# Written by the SP1.1 session of SIM-ACI (Claude Opus 5.5) on 2026-11-12.
+# R session and RStudio files
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+# Products of R CMD build and R CMD check
+*.tar.gz
+*.Rcheck/
+# Outputs of the example scripts of the user guide (docs/scripts/)
+docs/generated/
