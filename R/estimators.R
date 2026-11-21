@@ -25,9 +25,25 @@
 #   row; estimate_all() returns them empty for a run that fell (review of the code of
 #   campaigns 2 and 3 of M1, 2026-11-07, finding F4), so that runs.csv keeps its columns when
 #   no simulation has outcomes.
+#   walkbench 0.7.0 (2026-11-20, SP1.1 session, Claude Opus 5.5): the methods "global" and
+#   "global_by_cycle" of resample_states() count their grid points with grid_count(), from the
+#   number of cycles; the grid now always ends at the end of the run (decision of the author of
+#   2026-11-19, finding of the web-simulator session of SIM-ACI, Claude Opus 5.5).
 # Dependencies: stats, MASS; pinned RACING engine; frozen dfa_alpha()
 # Input: none
 # Output: none
+
+# Number of points of the uniform grid of the methods "global" and "global_by_cycle": n_per
+# points per unit of cycles_per_unit cycles, the start and the end of the run included. The
+# cycles of a run are contiguous, so (t1 - t0) / mean_unit * n_per equals
+# n_cycles * n_per / cycles_per_unit in exact arithmetic. Up to walkbench 0.6.2 the count was
+# floor((t1 - t0) / mean_unit * n_per) + 1, computed from the times; a rounding error of about
+# 1e-12 could put the argument of floor() just below the whole number, and the grid then lost
+# its last point, at the end of the run. The count now comes from the number of cycles, which
+# is exact and gives the same result on every platform (walkbench 0.7.0).
+grid_count <- function(n_cycles, n_per, cycles_per_unit) {
+  floor(n_cycles * n_per / cycles_per_unit) + 1L
+}
 
 # Linear resampling of the trajectory on a new time grid, with the exact cycle boundaries.
 # `coords`: NULL (the sampled coordinates named in `state`), or the `model_coordinates` of the
@@ -46,7 +62,7 @@ resample_states <- function(run, state, method, n_per, cycles_per_unit, coords =
     t0 <- ev$t_start[1]
     t1 <- ev$t_end[nrow(ev)]
     mean_unit <- mean(ev$duration) * cycles_per_unit
-    n_out <- floor((t1 - t0) / mean_unit * n_per) + 1L
+    n_out <- grid_count(nrow(ev), n_per, cycles_per_unit)
     grid <- pmin(t0 + (seq_len(n_out) - 1) * mean_unit / n_per, t1)
     k_of <- findInterval(grid, ev$t_start)
     src <- if (is.null(coords)) state else coords$sampled
@@ -80,7 +96,7 @@ resample_states <- function(run, state, method, n_per, cycles_per_unit, coords =
     t0 <- ev$t_start[1]
     t1 <- ev$t_end[nrow(ev)]
     mean_unit <- mean(ev$duration) * cycles_per_unit
-    n_out <- floor((t1 - t0) / mean_unit * n_per) + 1L
+    n_out <- grid_count(nrow(ev), n_per, cycles_per_unit)
     # post-generation fix by Claude Opus 5.5, 2026-11-06: rounding could put the last grid
     # point just after t1, where approx() returns NA; the grid is now bounded by t1
     grid <- pmin(t0 + (seq_len(n_out) - 1) * mean_unit / n_per, t1)

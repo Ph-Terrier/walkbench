@@ -48,8 +48,14 @@ fi_autocorrelation,analytic predictor,pred
 ar1_autocorrelation,analytic predictor,pred
 centered_autocovariance,analytic predictor,pred
 sample_autocovariance,analytic predictor,pred
-spinal_d_grid,analytic predictor,pred
+predictor_d_grid,analytic predictor,pred
+predictor_levels,analytic predictor,pred
+predictor_lambda_l_m1,analytic predictor,pred
+predictor_lambda_l_lsq,analytic predictor,pred
+predictor_n_past,analytic predictor,pred
+predictor_settings_m2,analytic predictor,pred
 predict_spinal_levels,analytic predictor,pred
+spinal_d_grid,analytic predictor,pred
 spinal_lambda_l_m1,analytic predictor,pred
 spinal_lambda_l_lsq,analytic predictor,pred
 spinal_n_past,analytic predictor,pred

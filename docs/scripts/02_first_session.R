@@ -3,18 +3,18 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: path of the package (.. in place of ../../testbed), name of its temporary copy; folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: path of the package (.. in place of ../../testbed), name of its temporary copy; folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
 # Description: checks the facts on installation that the chapter states, then runs a first
-#   session. The hidden blocks read the DESCRIPTION file of walkbench 0.6.2, install a
+#   session. The hidden blocks read the DESCRIPTION file of walkbench 0.7.0, install a
 #   temporary copy of the source of the package into a temporary library and call the
 #   installed package from a new R process; the copy and the library are removed at the end,
 #   and nothing is written into the folder of the package. The printed blocks build model M1,
 #   define one experiment as a function of a model (uniform uncorrelated input, run, removal of
 #   the transient cycles, outcomes) and apply it to M1 and to M2. Seeds: 90,002,001 and
 #   90,002,002 (cell 20 of the block of the guide).
-# Dependencies: walkbench 0.6.2 (loaded by the driver), utils
+# Dependencies: walkbench 0.7.0 (loaded by the driver), utils
 # Input: DESCRIPTION of the package (read only)
 # Output: generated/02_first_session/: snippets/*.txt, output/*.txt, numbers.tex, numbers.csv,
 #   run_log.csv, session.txt

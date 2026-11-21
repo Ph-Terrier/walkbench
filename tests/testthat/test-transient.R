@@ -4,7 +4,7 @@
 #   code-generation model
 # Date: 2026-11-06
 # Description: transient_cycles() against the rule that the author chose on 2026-11-06 at
-#   13:55 (register SIMACI/docs/author_decisions.md; analysis plan, draft 0.5, sections 4.3
+#   13:55 (decision register of the SIM-ACI project; analysis plan, draft 0.5, sections 4.3
 #   and 4.8): the smallest n with lambda^(2n) <= 0.005, at least 20 cycles. M1 keeps 20
 #   cycles, so that the replay of the feasibility study is unchanged; M2 in the configuration
 #   of section 4.10 takes 34 cycles.

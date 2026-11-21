@@ -2,9 +2,12 @@
 % Please edit documentation in R/predictor.R
 \name{spinal_lambda_l_lsq}
 \alias{spinal_lambda_l_lsq}
+\alias{predictor_lambda_l_lsq}
 \title{Predicted long-term exponent from a least-squares slope of the levels}
 \usage{
 spinal_lambda_l_lsq(pred, factor = 2)
+
+predictor_lambda_l_lsq(pred, factor = 2)
 }
 \arguments{
 \item{pred}{result of \code{\link[=predict_spinal_levels]{predict_spinal_levels()}}.}
@@ -16,5 +19,6 @@ The predicted lambda_L.
 }
 \description{
 The least-squares slope of y(K) on K, times \code{factor}. For M2 (update 1, rule E3), the
-levels are K = 8 to 20 steps and the factor is 2, which gives lambda_L per stride.
+levels are K = 8 to 20 steps and the factor is 2, which gives lambda_L per stride. The name
+\code{predictor_lambda_l_lsq()}, added in walkbench 0.7.0, gives the same function.
 }

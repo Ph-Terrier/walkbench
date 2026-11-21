@@ -10,6 +10,11 @@
 #   least-squares slopes. The resampling and the curve are checked against an independent
 #   computation written below, which follows resample_by_step() and to_model_vars() of
 #   SIMACI/wp1_replication/06_m2_estimation_sensitivity.R.
+#   walkbench 0.7.0 (2026-11-20, SP1.1 session, Claude Opus 5.5): the independent
+#   computation counts its grid points from the number of steps, as resample_states() now
+#   does, and a test checks on a constructed run that the grid of "global" and
+#   "global_by_cycle" ends at the end of the run when the count from the times falls just
+#   below the whole number.
 # Dependencies: testthat, walkbench
 # Input: none
 # Output: none
@@ -37,7 +42,8 @@ independent_resampling <- function(run, n_per = 100) {
   t0 <- ev$t_start[1]
   t1 <- ev$t_end[nrow(ev)]
   mean_stride <- 2 * mean(ev$duration)
-  n_out <- floor((t1 - t0) / mean_stride * n_per) + 1L
+  # walkbench 0.7.0: n_per points per stride from the number of steps, end of the run included
+  n_out <- nrow(ev) * n_per / 2 + 1
   grid <- pmin(t0 + (seq_len(n_out) - 1) * mean_stride / n_per, t1)
   X <- matrix(NA_real_, n_out, 4L)
   for (g in seq_len(n_out)) {
@@ -98,6 +104,32 @@ test_that("the recovered state variables equal the post-strike states of the loo
   }, numeric(4)))
   ref <- as.matrix(ev[, c("theta_post", "theta_dot_post", "phi_post", "phi_dot_post")])
   expect_lt(max(abs(unname(post) - unname(ref))), 1e-15)
+})
+
+test_that("the grid of the global resamplings ends at the end of the run (walkbench 0.7.0)", {
+  # constructed run of 29 contiguous cycles; the state q = sin(t) is known at every time
+  n_cyc <- 29L
+  dur <- 0.9 + 0.1 * sin(seq_len(n_cyc))
+  t_end <- cumsum(dur)
+  t_start <- c(0, t_end[-n_cyc])
+  t_mid <- (t_start + t_end) / 2
+  q_at <- function(t) matrix(sin(t), 1, dimnames = list(NULL, "q"))
+  run <- list(samples = cbind(t = t_mid, cycle = seq_len(n_cyc), q = sin(t_mid)),
+              events = data.frame(cycle = seq_len(n_cyc), t_start = t_start, t_end = t_end,
+                                  duration = dur),
+              bounds = lapply(seq_len(n_cyc), function(k) list(start = q_at(t_start[k]),
+                                                               end = q_at(t_end[k]))))
+  for (cpu in c(1, 2)) {
+    whole <- n_cyc * 100 / cpu
+    # with these durations, the count of walkbench 0.6.2, from the times, lost the last point
+    expect_lt(floor((t_end[n_cyc] - t_start[1]) / (mean(dur) * cpu) * 100), whole)
+    for (method in c("global", "global_by_cycle")) {
+      rs <- walkbench:::resample_states(run, "q", method, 100, cpu)
+      expect_identical(nrow(rs$X), as.integer(whole + 1))
+      expect_lt(abs(rs$X[nrow(rs$X), 1] - sin(t_end[n_cyc])), 1e-9)
+      expect_identical(rs$X[1, 1], sin(t_start[1]))
+    }
+  }
 })
 
 test_that("each grid point is interpolated inside its own step", {

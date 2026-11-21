@@ -4,10 +4,10 @@
 #   dispatched by the guide session of SIM-ACI (Claude Fable 5.2), without a code-generation
 #   model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-13
-# Description: applies the estimators of walkbench 0.6.2 to one run of model M1 and to one
+# Description: applies the estimators of walkbench 0.7.0 to one run of model M1 and to one
 #   run of model M2 with its default arguments: divergence exponents with the settings of each
 #   model, Floquet multipliers against the reference stride of an unperturbed run, kinematic
 #   variability, scaling exponents of the DFA and the summary row of estimate_all(). Each
@@ -22,7 +22,7 @@
 #   The hidden blocks call two internal functions of the package, resample_states() and
 #   m1_walker_env(), to check what the text says about the resampling and about the DFA of
 #   the pinned walker file.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), stats, graphics, grDevices
+# Dependencies: walkbench 0.7.0 (loaded by the driver), stats, graphics, grDevices
 # Input: none
 # Output: generated/10_estimators/: snippets/*.txt, output/*.txt, signatures/*.txt,
 #   numbers.tex, numbers.csv, fig_divergence.pdf, fig_floquet.pdf, run_log.csv, session.txt
@@ -473,7 +473,7 @@ if (!identical(messages, expected)) {
 }
 
 ## ---- hidden: checks-options ----
-# Statements of the chapter on the options that no model of version 0.6.2 uses, checked on
+# Statements of the chapter on the options that no model of version 0.7.0 uses, checked on
 # the short run of M2 (40 kept cycles) in the continuous leg coordinates
 dvc <- estimate_divergence(run_short, stc)
 n_c <- length(dvc$neighbors)

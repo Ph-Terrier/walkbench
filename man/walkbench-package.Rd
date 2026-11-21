@@ -13,8 +13,9 @@ closed-loop port (\code{\link[=make_controller_h3a]{make_controller_h3a()}}, \co
 outputs (\code{\link[=simulate_run]{simulate_run()}}, \code{\link[=trim_run]{trim_run()}}), common estimators (\code{\link[=estimate_all]{estimate_all()}}) and a run
 driver with seeds and run log (\code{\link[=run_trial]{run_trial()}}, \code{\link[=write_campaign_log]{write_campaign_log()}}), and the campaign rules of
 the analysis plan frozen at commit ba72afe (\code{\link[=campaign_table]{campaign_table()}}, \code{\link[=summarize_cells]{summarize_cells()}}), and the analytic
-predictor of SPINAL (\code{\link[=predict_spinal_levels]{predict_spinal_levels()}}) with the extension to M2 of update 1 of the
-registration osf.io/m74tk (\code{\link[=spinal_settings_m2]{spinal_settings_m2()}}). Version 0.6.2
+predictor (\code{\link[=predictor_levels]{predictor_levels()}}) with the extension to M2 of update 1 of the
+registration osf.io/m74tk (\code{\link[=predictor_settings_m2]{predictor_settings_m2()}}). The functions of the predictor keep
+their former names, such as \code{\link[=predict_spinal_levels]{predict_spinal_levels()}} and \code{\link[=spinal_settings_m2]{spinal_settings_m2()}}. Version 0.7.0
 contains the models M1 (\code{\link[=model_m1]{model_m1()}}) and M2 (\code{\link[=model_m2]{model_m2()}}).
 }
 \seealso{

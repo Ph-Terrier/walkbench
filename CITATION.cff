@@ -2,7 +2,11 @@
 # Written by the SP1.1 session of SIM-ACI (Claude Opus 5.5) on 2026-11-12, without a
 # code-generation model. Title, version and abstract follow DESCRIPTION; the abstract
 # writes each DOI as "doi:..." in the parentheses of its citation, and its last sentence,
-# on the user guide, was added on 2026-11-18 by the same session. The license of the
+# on the user guide, was added on 2026-11-18 by the same session, completed on
+# 2026-11-20 for version 0.7.0 (folder web/) and revised on 2026-11-21 (guide of
+# version 0.7.0). The field doi is the
+# concept DOI of walkbench on Zenodo, which names all the versions; the reference of the
+# preprint of the first article of SIM-ACI was added the same day. The license of the
 # guide (CC BY 4.0) is stated in README.md and .zenodo.json, because CFF reads several
 # licenses as alternatives. When .zenodo.json is
 # present, Zenodo uses that file only; the two files give the same title, author,
@@ -11,7 +15,8 @@ cff-version: 1.2.0
 message: "If you use walkbench, please cite it as below. The Zenodo record of each release gives the DOI of that version."
 title: "walkbench: Testbed of Walking Models for the Divergence Exponents of Gait"
 type: software
-version: "0.6.2"
+version: "0.7.0"
+doi: "10.5281/zenodo.24354488"
 authors:
   - family-names: Terrier
     given-names: Philippe
@@ -41,8 +46,9 @@ abstract: >
   series and their surrogates, and the fall rate of each cell. An analytic
   predictor gives the expected divergence curve and the long-term exponent
   from the linearization of a model and the autocovariance of its input.
-  The folder docs/ of the repository holds the user guide of this version in
-  PDF and the example scripts that produced it.
+  The folder docs/ of the repository holds the user guide of version 0.7.0 in
+  PDF and the example scripts that produced it. The folder web/ holds a
+  simulator of the models M1 and M2 for a web browser.
 keywords:
   - passive dynamic walking
   - walking model
@@ -73,3 +79,12 @@ references:
     publisher:
       name: "OSF Registries"
     scope: "Registered analysis plan whose campaign rules and predictor settings walkbench applies."
+  - type: article
+    title: "The long-term divergence exponent and the temporal structure of step-to-step perturbations: a simulation study in two passive walking models"
+    authors:
+      - family-names: Terrier
+        given-names: Philippe
+    year: 2026
+    doi: "10.48550/arXiv.2611.26182"
+    url: "https://arxiv.org/abs/2611.26182"
+    scope: "Preprint of the first article of SIM-ACI (arXiv:2611.26182), whose results come from walkbench 0.6.2 (doi:10.5281/zenodo.24354489)."

@@ -3,7 +3,7 @@
 # Produced by: written by the SP1.1 session of SIM-ACI (Claude Opus 5.5), without a
 #   code-generation model; revised by the same session on 2026-11-07 for walkbench 0.6.1, on
 #   the task of the coordination session (Claude Opus 5.5) after the answer of the author of
-#   2026-11-07 at 07:31 (register SIMACI/docs/author_decisions.md); revised again on 2026-11-07
+#   2026-11-07 at 07:31 (decision register of the SIM-ACI project); revised again on 2026-11-07
 #   for walkbench 0.6.2 (finding F1 of the review of the code of campaigns 2 and 3 of M1,
 #   option B of the author of 08:17, triage approved at 08:41, register)
 # Date: 2026-11-06 (revised 2026-11-07)

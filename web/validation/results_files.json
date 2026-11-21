@@ -1,0 +1,189 @@
+{
+  "produced_by": "tests/run_tests_files.js, written by the orchestrating model of the web-simulator session of SIM-ACI (Claude Opus 5.5)",
+  "date": "2026-11-21T13:55:32.613Z",
+  "runtime": "Deno 1.46.3, V8 12.9.202.5-rusty",
+  "vectors": {
+    "walkbench_version": "0.7.0",
+    "git_commit": "754de72b70677dc048b3d7949322e79cf7704546",
+    "date": "2026-11-21T13:11:16+0100",
+    "r_version": "R version 4.5.1 (2025-06-13 ucrt)",
+    "scan_call": "scan(file, comment.char = \"#\")"
+  },
+  "tolerances": {
+    "sameInput": 1e-9
+  },
+  "n_tests": 7,
+  "n_failed": 0,
+  "results": [
+    {
+      "id": "F1",
+      "label": "outcome of the page for 17 files (6 accepted, 11 refused) and the lines that it reports: number of files that differ from the rule",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    {
+      "id": "F2",
+      "label": "parseSeriesText(): same values as readSeriesText() for an accepted file, error for a refused file: number of files that differ",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    {
+      "id": "F3",
+      "label": "files accepted by the page and refused by scan() of R, or read with another number of values",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    {
+      "id": "F4",
+      "label": "input_fixed_series() on the values read by the page and by scan() (4 files, sd 0.00234)",
+      "max_abs_diff": 1.734723475976807e-18,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "F5",
+      "label": "values read by the page whose IEEE bits differ from those of scan() (1 of 10760; the column gives the largest relative difference)",
+      "max_abs_diff": 1.502003547953352e-16,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "F6",
+      "label": "files with a decimal comma accepted by the page (1 file)",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    },
+    {
+      "id": "F7",
+      "label": "seriesProblem() with 120 values at least: number of the 9 series whose class (too few values, all values equal, valid) differs from the expected one",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true
+    }
+  ],
+  "files": [
+    {
+      "name": "valid: 600 values, comment line, blank line, trailing comment, LF",
+      "page_accepts": true,
+      "r_accepts": true,
+      "r_n": 600,
+      "r_error": null
+    },
+    {
+      "name": "valid: 150 values, byte-order mark and CRLF",
+      "page_accepts": true,
+      "r_accepts": true,
+      "r_n": 150,
+      "r_error": null
+    },
+    {
+      "name": "valid: forms of numbers (.5, +.5, 5., exponents, leading zeros, -0), CR line ends",
+      "page_accepts": true,
+      "r_accepts": true,
+      "r_n": 10,
+      "r_error": null
+    },
+    {
+      "name": "valid: comment lines only",
+      "page_accepts": true,
+      "r_accepts": true,
+      "r_n": 0,
+      "r_error": null
+    },
+    {
+      "name": "valid: empty file",
+      "page_accepts": true,
+      "r_accepts": true,
+      "r_n": 0,
+      "r_error": null
+    },
+    {
+      "name": "conversion: 10,000 values with 6 to 21 significant digits",
+      "page_accepts": true,
+      "r_accepts": true,
+      "r_n": 10000,
+      "r_error": null
+    },
+    {
+      "name": "decimal comma",
+      "page_accepts": false,
+      "r_accepts": false,
+      "r_n": null,
+      "r_error": "scan() attendait 'a real' et a reçu '0,123'"
+    },
+    {
+      "name": "semicolon between two numbers",
+      "page_accepts": false,
+      "r_accepts": false,
+      "r_n": null,
+      "r_error": "scan() attendait 'a real' et a reçu '0.1;0.2'"
+    },
+    {
+      "name": "several numbers on a line",
+      "page_accepts": false,
+      "r_accepts": true,
+      "r_n": 3,
+      "r_error": null
+    },
+    {
+      "name": "two columns separated by a tab",
+      "page_accepts": false,
+      "r_accepts": true,
+      "r_n": 6,
+      "r_error": null
+    },
+    {
+      "name": "header line",
+      "page_accepts": false,
+      "r_accepts": false,
+      "r_n": null,
+      "r_error": "scan() attendait 'a real' et a reçu 'value'"
+    },
+    {
+      "name": "NA",
+      "page_accepts": false,
+      "r_accepts": true,
+      "r_n": 3,
+      "r_error": null
+    },
+    {
+      "name": "Inf and an overflow",
+      "page_accepts": false,
+      "r_accepts": true,
+      "r_n": 2,
+      "r_error": null
+    },
+    {
+      "name": "hexadecimal number",
+      "page_accepts": false,
+      "r_accepts": true,
+      "r_n": 2,
+      "r_error": null
+    },
+    {
+      "name": "quoted number",
+      "page_accepts": false,
+      "r_accepts": false,
+      "r_n": null,
+      "r_error": "scan() attendait 'a real' et a reçu '\"0.5\"'"
+    },
+    {
+      "name": "no-break space after a number",
+      "page_accepts": false,
+      "r_accepts": false,
+      "r_n": null,
+      "r_error": "scan() attendait 'a real' et a reçu '0.5 '"
+    },
+    {
+      "name": "thousands separator",
+      "page_accepts": false,
+      "r_accepts": false,
+      "r_n": null,
+      "r_error": "scan() attendait 'a real' et a reçu '1,234.5'"
+    }
+  ]
+}

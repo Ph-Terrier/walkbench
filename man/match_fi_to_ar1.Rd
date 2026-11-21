@@ -16,5 +16,6 @@ d_phi.
 }
 \description{
 The value d_phi for which the slope of 0.5 ln v(K) over \code{k_window} equals that of the AR(1)
-series (analysis plan, section 4.9); root of the difference on (-0.45, 0.49), as in SPINAL.
+series (analysis plan, section 4.9); root of the difference on (-0.45, 0.49), as in the
+reference scripts of the predictor (repository "time series R" of the author).
 }

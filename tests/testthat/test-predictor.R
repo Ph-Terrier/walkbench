@@ -13,6 +13,8 @@
 #   repository of origin, is not evaluated. The values printed by 07b
 #   (07b_walker_prediction_results.txt) and the matched FI levels printed by
 #   10_ar1_against_fi_results.txt are checked as well.
+#   walkbench 0.7.0 (2026-11-20, SP1.1 session, Claude Opus 5.5): the aliases predictor_*()
+#   are the same functions as the former names.
 # Dependencies: testthat, walkbench
 # Input: none
 # Output: none
@@ -209,4 +211,16 @@ test_that("window slopes and matched FI levels reproduce 10_ar1_against_fi of SP
   expect_equal(round(window_slope_half_log_v(fi_autocorrelation(0, 21), 4:10), 4), 0.0752)
   got <- vapply(c(-0.3, 0.3, 0.5, 0.8), match_fi_to_ar1, numeric(1), k_window = 2:4)
   expect_equal(round(got, 3), c(-0.099, 0.145, 0.249, 0.403))
+})
+
+test_that("the aliases predictor_*() are the functions of the former names (walkbench 0.7.0)", {
+  expect_identical(predictor_levels, predict_spinal_levels)
+  expect_identical(predictor_d_grid, spinal_d_grid)
+  expect_identical(predictor_lambda_l_m1, spinal_lambda_l_m1)
+  expect_identical(predictor_lambda_l_lsq, spinal_lambda_l_lsq)
+  expect_identical(predictor_n_past, spinal_n_past)
+  expect_identical(predictor_settings_m2, spinal_settings_m2)
+  expect_true(all(c("predictor_levels", "predictor_d_grid", "predictor_lambda_l_m1",
+                    "predictor_lambda_l_lsq", "predictor_n_past", "predictor_settings_m2") %in%
+                    getNamespaceExports("walkbench")))
 })

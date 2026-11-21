@@ -3,10 +3,10 @@
 # Produced by: written by a writer agent of the guide session of SIM-ACI (Claude Fable 5.2),
 #   dispatched by the guide session (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
-# Description: builds model M1 of walkbench 0.6.2 with model_m1(), reads the members of the
+# Description: builds model M1 of walkbench 0.7.0 with model_m1(), reads the members of the
 #   model object, computes the fixed point of the cycle map and one cycle with and without an
 #   input, simulates an unperturbed run on the limit cycle, converts a sample from the
 #   continuous leg coordinates to the stance-leg coordinates, and simulates a run that ends in
@@ -17,7 +17,7 @@
 #   functions, register the numbers quoted in the chapter, check the statements of the text
 #   (members of the model object, error messages, search of the fixed point at other slopes)
 #   and draw its figure; the other blocks are printed in the chapter with their output.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), stats, graphics, grDevices
+# Dependencies: walkbench 0.7.0 (loaded by the driver), stats, graphics, grDevices
 # Input: none
 # Output: generated/04_model_m1/: snippets/*.txt, output/*.txt, signatures/*.txt, numbers.tex,
 #   numbers.csv, fig_limit_cycle.pdf, run_log.csv, session.txt

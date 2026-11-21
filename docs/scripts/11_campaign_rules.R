@@ -4,10 +4,10 @@
 #   dispatched by the guide session of SIM-ACI (Claude Fable 5.2), without a code-generation
 #   model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: path of the package in a check of write_campaign_log() (.. in place of ../../testbed); folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: path of the package in a check of write_campaign_log() (.. in place of ../../testbed); folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-13
-# Description: applies the campaign rules of walkbench 0.6.2 to a demonstration computed for
+# Description: applies the campaign rules of walkbench 0.7.0 to a demonstration computed for
 #   the guide: the table of the seven campaigns, the numbering of the cells of a design, the
 #   check of the seed blocks, six trials of model M1 in two cells that differ by the amplitude
 #   rho of a uniform uncorrelated input (cells 111 and 112, three replicates each, 20 transient
@@ -21,7 +21,7 @@
 #   blocks whose label starts with "hidden:" write the signatures of the functions, register
 #   the numbers quoted in the chapter, draw its figure and run the checks on which the text
 #   relies; the other blocks are printed in the chapter with their output.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), jsonlite, stats, graphics, grDevices,
+# Dependencies: walkbench 0.7.0 (loaded by the driver), jsonlite, stats, graphics, grDevices,
 #   utils
 # Input: none
 # Output: generated/11_campaign_rules/: snippets/*.txt, output/*.txt, signatures/*.txt,

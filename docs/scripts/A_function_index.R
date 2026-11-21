@@ -3,15 +3,15 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: path of the help pages (../man in place of ../../testbed/man); folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: path of the help pages (../man in place of ../../testbed/man); folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
-# Description: writes one table per part of walkbench 0.6.2 with every exported function, the
+# Description: writes one table per part of walkbench 0.7.0 with every exported function, the
 #   title of its help page and the chapter of the guide that documents it. The functions and
 #   their parts come from scripts/function_map.csv, which is checked against the namespace;
 #   the titles are read from the help pages of the package (man/*.Rd), through their
 #   \alias and \title entries. The script prints no code block: every block is hidden.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), tools, utils
+# Dependencies: walkbench 0.7.0 (loaded by the driver), tools, utils
 # Input: scripts/function_map.csv; the help pages of the package (read only)
 # Output: generated/A_function_index/: tables.tex, numbers.tex, numbers.csv, run_log.csv,
 #   session.txt

@@ -3,7 +3,7 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
 # Description: reads the run logs that the driver wrote for the example scripts of the guide
@@ -13,7 +13,7 @@
 #   the packages, which must be the same for every script. The script runs after all the
 #   others: build.py runs the scripts in the order of their names, and this name sorts last.
 #   It prints no code block: every block is hidden.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), utils
+# Dependencies: walkbench 0.7.0 (loaded by the driver), utils
 # Input: generated/*/run_log.csv, generated/*/session.txt, generated/*/numbers.csv,
 #   scripts/*.R
 # Output: generated/D_example_scripts/: table_scripts.tex, numbers.tex, numbers.csv,

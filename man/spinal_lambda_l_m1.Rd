@@ -2,9 +2,12 @@
 % Please edit documentation in R/predictor.R
 \name{spinal_lambda_l_m1}
 \alias{spinal_lambda_l_m1}
-\title{Predicted long-term exponent of M1 from the levels of the SPINAL form}
+\alias{predictor_lambda_l_m1}
+\title{Predicted long-term exponent of M1 from the levels of the analytic predictor}
 \usage{
 spinal_lambda_l_m1(pred)
+
+predictor_lambda_l_m1(pred)
 }
 \arguments{
 \item{pred}{result of \code{\link[=predict_spinal_levels]{predict_spinal_levels()}} with levels at 3 and 4 steps.}
@@ -14,5 +17,6 @@ The predicted lambda_L of M1.
 }
 \description{
 (y(4 steps) - y(3 steps)) / T, per unit of model time, the quantity that M1 averages over
-its window of 3 to 4 steps (07b).
+its window of 3 to 4 steps (07b). The name \code{predictor_lambda_l_m1()}, added in walkbench
+0.7.0, gives the same function.
 }

@@ -3,7 +3,7 @@
 # Produced by: written by the SP1.1 session of SIM-ACI (Claude Opus 5.5), without a
 #   code-generation model, on the task of the coordination session (Claude Opus 5.5) that
 #   followed the approval by the author of the triage of the review (2026-11-07, 08:41,
-#   register SIMACI/docs/author_decisions.md)
+#   decision register of the SIM-ACI project)
 # Date: 2026-11-07
 # Description: findings F2, F4, F7 and F10 of the review of the code of campaigns 2 and 3 of M1
 #   by a verification sub-agent (Claude Fable 5.1); triage in
@@ -13,6 +13,9 @@
 #   of a completed trial, empty, and estimate_all() of a run that fell has them too.
 #   write_campaign_log() records the kinds of the random number generator, the versions of
 #   pkgload and parallel, and the status of the whole repository.
+#   walkbench 0.7.0 (2026-11-20, SP1.1 session, Claude Opus 5.5): write_campaign_log() with
+#   summary rows writes them to runs.csv (finding 2 of the external audit of the code, triage
+#   of the submission session of article P1, 2026-11-19).
 # Dependencies: testthat, walkbench, jsonlite
 # Input: none
 # Output: temporary folders, removed at the end of each test
@@ -101,4 +104,35 @@ test_that("write_campaign_log() records the generator, pkgload, parallel and the
   expect_true(all(c("pkgload", "parallel") %in% names(log$package_versions)))
   expect_identical(log$package_versions$parallel, as.character(utils::packageVersion("parallel")))
   expect_true(all(c("commit", "modified_files") %in% names(log$whole_repository)))
+})
+
+test_that("write_campaign_log() writes the summary rows to runs.csv (walkbench 0.7.0)", {
+  m1 <- model_m1()
+  values <- sin(seq_len(60))
+  ok <- run_trial(m1, draw_fixed(m1, input_fixed_series(values, 20L, 1e-3, value_unit = "rad")),
+                  seed_of = function(a) 97000001 + a, n_transient = 20L, n_keep = 60L)
+  fall <- run_trial(m1, draw_fixed(m1, input_fixed_series(values, 20L, 0.05, value_unit = "rad")),
+                    seed_of = function(a) 97000001 + a, n_transient = 20L, n_keep = 60L)
+  rows <- rbind(ok$summary, fall$summary)
+  dir <- tempfile("wb_runs_")
+  on.exit(unlink(dir, recursive = TRUE), add = TRUE)
+  t0 <- Sys.time()
+  path <- write_campaign_log(dir, campaign = "test", purpose = "test", script = "none",
+                             producer = "test", master_seed = 97000000, design = list(n = 2),
+                             model = m1, injection = m1$default_injection,
+                             settings = m1$estimation_settings, start = t0, end = t0,
+                             runs = rows, campaign_path = dir)
+  expect_true(file.exists(path))
+  back <- utils::read.csv(file.path(dir, "runs.csv"), stringsAsFactors = FALSE)
+  expect_identical(names(back), names(rows))
+  expect_identical(nrow(back), 2L)
+  # numbers are written with 15 significant digits; missing outcomes stay missing
+  for (col in names(rows)) {
+    if (is.numeric(rows[[col]])) {
+      expect_equal(as.numeric(back[[col]]), as.numeric(rows[[col]]), tolerance = 1e-14)
+    } else {
+      expect_identical(as.character(back[[col]]), as.character(rows[[col]]))
+    }
+  }
+  expect_true(all(is.na(back[2, outcome_columns(m1)])))
 })

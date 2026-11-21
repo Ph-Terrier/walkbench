@@ -4,10 +4,10 @@
 # Produced by: written by a writer agent of the guide session of SIM-ACI (Claude Fable 5.2),
 #   dispatched by the guide session (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
-# Description: builds model M2 of walkbench 0.6.2 with its default parameters, prints its fixed
+# Description: builds model M2 of walkbench 0.7.0 with its default parameters, prints its fixed
 #   point and compares it with model M1 at the same slope (fixed point, and a run with the same
 #   floor-height input). Reaches the configurations r_f = 0.3 and r_f = 0.3 with k = 2 by
 #   continuation, with the fixed point of each configuration as the initial guess of the next
@@ -23,7 +23,7 @@
 #   cycle of the simplest walker at slope 0.02, a value of t_min above the step duration),
 #   register the numbers quoted in the chapter and draw its figure; the other blocks are
 #   printed in the chapter with their output. The script stops when a check fails.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), stats, graphics, grDevices, utils
+# Dependencies: walkbench 0.7.0 (loaded by the driver), stats, graphics, grDevices, utils
 # Input: none
 # Output: generated/05_model_m2/: snippets/*.txt, output/*.txt, signatures/*.txt, numbers.tex,
 #   numbers.csv, fig_limit_cycles.pdf, run_log.csv, session.txt

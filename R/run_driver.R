@@ -6,7 +6,7 @@
 # Description: specification, sections 8 and 10. Seed rule approved by the author on
 #   2026-11-05 (open choice O4): s = master + 100,000 x attempt + 100 x cell + replicate.
 #   walkbench 0.3.0 (2026-11-06): transient_cycles() gives the length of the transient under
-#   the rule that the author chose on 2026-11-06 at 13:55 (register SIMACI/docs/author_decisions.md;
+#   the rule that the author chose on 2026-11-06 at 13:55 (decision register of the SIM-ACI project;
 #   analysis plan, draft 0.5, sections 4.3 and 4.8), and it is the default of run_trial().
 #   walkbench 0.4.0 (2026-11-06): rules of the analysis plan frozen at commit ba72afe
 #   (osf.io/m74tk), section 4.3: transient of a closed loop from the eigenvalues of the
@@ -18,8 +18,8 @@
 #   walkbench 0.6.1 (2026-11-07): only an error of the compiled solver of deSolve counts as a
 #   numerical failure (from_integrator()); any other error stops run_trial() with its original
 #   message; the warnings of the solver are kept. Task of the coordination session (Claude
-#   Opus 5.5) after the answer of the author of 2026-11-07 at 07:31 (register
-#   SIMACI/docs/author_decisions.md).
+#   Opus 5.5) after the answer of the author of 2026-11-07 at 07:31 (decision
+#   register of the SIM-ACI project).
 #   walkbench 0.6.2 (2026-11-07): fixes of the review of the code of campaigns 2 and 3 of M1 by
 #   a verification sub-agent (Claude Fable 5.1), triage approved by the author on 2026-11-07
 #   at 08:41 (register; SIMACI/docs/reviews/2026-11-07_triage_campaigns_m1.md): F1, an attempt

@@ -16,5 +16,6 @@ The slope per value of the series.
 }
 \description{
 v(K) is the variance of the sum of K consecutive values; the slope is the least-squares
-slope of 0.5 ln v(K) on K over \code{k_window}, as in 10_ar1_against_fi.R of SPINAL.
+slope of 0.5 ln v(K) on K over \code{k_window}, as in the script \verb{10_ar1_against_fi.R} of the
+repository "time series R" of the author.
 }

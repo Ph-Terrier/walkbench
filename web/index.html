@@ -1,0 +1,181 @@
+<!doctype html>
+<!--
+  Title: walkbench web simulator, models M1 and M2
+  Author: Philippe Terrier (HE-Arc Sante, Neuchatel), responsible author
+  Produced by: written by the orchestrating model of the web-simulator session of SIM-ACI
+    (Claude Opus 5.5), on 2026-11-19, without a code-generation model; layout adapted from
+    feasibility/walker_demo.html (Claude Fable 5, 2026-08-20)
+  Description: page of the simulator of models M1 and M2 (M2 added on 2026-11-19 by the same
+    session, after the decision of the author). Every script and style sheet is a local file
+    of this folder; the page sends no request to any server (Content-Security-Policy below)
+    and holds no third-party data. It opens from the file system or from a static web server.
+    Change of 2026-11-20 by the same model, after the remarks of the author on the first
+    trial: the live values sit beside the walker, and a note under the presets defines sigma_max.
+    Change of 2026-11-21 by the same model, after the decision of the author: the static title
+    and heading name both models, as the French text that the script writes at load.
+  Dependencies: css/simulator.css, js/wb_i18n.js, js/wb_estimators.js, js/wb_input.js,
+    js/wb_m1.js, js/wb_m2.js, js/wb_stream.js, js/wb_app.js
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' file:; style-src 'self' file:; img-src 'self' data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>walkbench : simulateur des modèles M1 et M2</title>
+<link rel="stylesheet" href="css/simulator.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="head-text">
+    <h1 data-i18n="title">walkbench : simulateur des modèles M1 et M2</h1>
+    <p class="sub" data-i18n="subtitle"></p>
+  </div>
+  <button id="langBtn" class="lang-btn" type="button">English</button>
+</header>
+
+<div class="banner" role="note" data-i18n="banner"></div>
+
+<div class="card stage">
+  <div class="scene">
+    <canvas id="cv" aria-label="walker"></canvas>
+    <p class="scene-legend" id="sceneLegend"></p>
+    <div class="overlay" id="fallMsg" data-i18n="fall_overlay"></div>
+  </div>
+  <div class="readout" aria-live="off">
+    <div><b data-i18n="steps">Pas</b><span class="big" id="stepCount">0</span></div>
+    <div><b data-i18n="falls">Chutes</b><span class="big" id="fallCount">0</span></div>
+    <div><b data-i18n="step_duration">Durée du pas</b><span class="big" id="durVal">–</span></div>
+    <div><b id="epsLabel">ε courant (rad)</b><span class="big" id="epsVal">–</span></div>
+    <div class="wide"><b data-i18n="alpha_live">α</b><span class="big alpha" id="alphaVal">–</span></div>
+    <div><b data-i18n="ls_live">λS</b><span class="big lamS" id="lamS">–</span></div>
+    <div><b data-i18n="ll_live">λL</b><span class="big lamL" id="lamL">–</span></div>
+  </div>
+</div>
+<p class="readout-note" data-i18n="live_note"></p>
+
+<div class="controls">
+  <div class="ctl model-choice">
+    <span class="lbl" data-i18n="model_label">Modèle</span>
+    <div class="field">
+      <input type="radio" name="model" id="modelM1" value="M1" checked>
+      <label for="modelM1" data-i18n="model_m1"></label>
+    </div>
+    <div class="field">
+      <input type="radio" name="model" id="modelM2" value="M2">
+      <label for="modelM2" data-i18n="model_m2"></label>
+    </div>
+  </div>
+  <div class="ctl small row">
+    <button id="playBtn" class="primary" type="button">Pause</button>
+    <button id="resetBtn" type="button" data-i18n="reset">Réinitialiser</button>
+  </div>
+  <div class="ctl small">
+    <label for="speed"><span data-i18n="speed">Vitesse</span> ×<span class="val" id="speedVal">1</span></label>
+    <input type="range" id="speed" min="0.25" max="4" step="0.25" value="1">
+  </div>
+  <div class="ctl">
+    <label for="sigma"><span id="sigmaLabel">Amplitude σ (rad)</span> = <span class="val" id="sigmaVal"></span></label>
+    <input type="range" id="sigma" min="0" max="0.008" step="0.00002" value="0.00234">
+    <span class="hint" id="sigmaHint"></span>
+  </div>
+  <div class="ctl">
+    <label for="dmem"><span data-i18n="dmem">Mémoire d</span> = <span class="val" id="dVal"></span></label>
+    <input type="range" id="dmem" min="-0.30" max="0.45" step="0.05" value="0">
+  </div>
+  <div class="presets">
+    <span class="lbl" data-i18n="presets">Préréglages</span>
+    <button type="button" data-p="none,0" data-i18n="preset_none"></button>
+    <button type="button" data-p="ref,0" data-i18n="preset_white"></button>
+    <button type="button" data-p="ref,0.45" data-i18n="preset_pers"></button>
+    <button type="button" data-p="ref,-0.30" data-i18n="preset_anti"></button>
+    <button type="button" data-p="beyond,0" data-i18n="preset_storm"></button>
+  </div>
+  <p class="hint presets-note" data-i18n="presets_note"></p>
+</div>
+
+<div class="row2">
+  <div class="card panel">
+    <h2 data-i18n="phase_title"></h2>
+    <div class="note" data-i18n="phase_note"></div>
+    <canvas id="cvA"></canvas>
+  </div>
+  <div class="card panel">
+    <h2 data-i18n="dur_title"></h2>
+    <div class="note" data-i18n="dur_note"></div>
+    <canvas id="cvB"></canvas>
+  </div>
+</div>
+
+<div class="card pad">
+  <h2 data-i18n="settings_title"></h2>
+  <div class="settings-grid">
+    <div>
+      <div class="lbl" data-i18n="source"></div>
+      <div class="field">
+        <input type="radio" name="source" id="srcArfima" value="arfima" checked>
+        <label for="srcArfima" data-i18n="source_arfima"></label>
+      </div>
+      <div class="field">
+        <input type="radio" name="source" id="srcFile" value="file">
+        <label for="srcFile" data-i18n="source_file"></label>
+        <input type="file" id="fileInput" accept=".txt,.csv,.tsv,.dat,text/plain">
+      </div>
+      <div class="hint" data-i18n="file_hint"></div>
+      <div class="hint" id="fileInfo"></div>
+      <div class="field mt">
+        <label for="seed" class="lbl" data-i18n="seed"></label>
+        <input type="number" id="seed" min="1" max="999999" step="1" value="1">
+      </div>
+      <div class="hint" data-i18n="seed_hint"></div>
+    </div>
+    <div>
+      <div class="lbl" id="windowsLabel"></div>
+      <div class="field">
+        <label for="ws0" data-i18n="ws_from"></label><input type="number" id="ws0" min="0" max="10" step="0.05" value="0">
+        <span data-i18n="to"></span><input type="number" id="ws1" min="0" max="10" step="0.05" value="0.1">
+      </div>
+      <div class="field">
+        <label for="wl0" data-i18n="wl_from"></label><input type="number" id="wl0" min="0" max="10" step="0.5" value="3">
+        <span data-i18n="to"></span><input type="number" id="wl1" min="0" max="10" step="0.5" value="4">
+        <button type="button" id="windowsPlan" data-i18n="windows_plan"></button>
+      </div>
+      <div class="error" id="windowsError"></div>
+      <div class="hint" id="windowsNote"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card pad">
+  <h2 data-i18n="ref_title"></h2>
+  <p class="hint" id="refText"></p>
+  <button id="refBtn" class="primary" type="button" data-i18n="ref_button"></button>
+  <div class="status" id="refStatus" aria-live="polite"></div>
+  <table class="results" id="refTable" hidden></table>
+  <div id="divPanel" hidden>
+    <h2 class="mt" data-i18n="div_title"></h2>
+    <div class="hint" data-i18n="div_note"></div>
+    <canvas id="cvD"></canvas>
+  </div>
+  <div id="rPanel" hidden>
+    <h2 class="mt" data-i18n="r_code_title"></h2>
+    <div class="hint" data-i18n="r_code_note"></div>
+    <pre class="rcode" id="rCode"></pre>
+    <button type="button" id="rCopy" data-i18n="r_code_copy"></button>
+    <span class="hint" id="rCopyStatus" aria-live="polite"></span>
+  </div>
+</div>
+
+<footer data-i18n-html="footer_html"></footer>
+
+</div>
+<script src="js/wb_i18n.js"></script>
+<script src="js/wb_estimators.js"></script>
+<script src="js/wb_input.js"></script>
+<script src="js/wb_m1.js"></script>
+<script src="js/wb_m2.js"></script>
+<script src="js/wb_stream.js"></script>
+<script src="js/wb_app.js"></script>
+</body>
+</html>

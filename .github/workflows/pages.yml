@@ -1,0 +1,45 @@
+# Publication of the web simulator of walkbench (folder web/) on GitHub Pages.
+# Responsible author: Philippe Terrier (HE-Arc Sante, Neuchatel).
+# Written by the SP1.1 session of SIM-ACI (Claude Opus 5.5) on 2026-11-20, without a
+# code-generation model, from the starter workflow "Deploy static content to Pages" of
+# actions/starter-workflows (pages/static.yml, read on 2026-11-20); the artifact holds web/
+# only. Item 6 of the list for walkbench 0.7.0, chosen by the author on 2026-11-20. The
+# workflow runs after a push to GitHub, once the settings of the repository give
+# "GitHub Actions" as the source of Pages.
+name: Publish the web simulator on GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload the folder web/
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "web"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

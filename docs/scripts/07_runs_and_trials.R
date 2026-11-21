@@ -4,10 +4,10 @@
 #   guide session of SIM-ACI dispatched by that session (Claude Fable 5.2), without a
 #   code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-13
-# Description: simulates runs of model M1 with the run driver of walkbench 0.6.2 and shows the
+# Description: simulates runs of model M1 with the run driver of walkbench 0.7.0 and shows the
 #   run object (samples, events, bounds), the removal of the transient cycles, the rule of the
 #   transient, a trial with its attempts, the seed rule, the check of the master seeds and the
 #   count of a numerical failure. Every input holds independent uniform values of one
@@ -21,7 +21,7 @@
 #   quoted in the chapter, check the statements and the error messages of the text and draw
 #   the figure; the other blocks are printed in the chapter with their output. One hidden
 #   check runs three unperturbed cycles of model M2 at its default parameters.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), deSolve, stats, graphics, grDevices,
+# Dependencies: walkbench 0.7.0 (loaded by the driver), deSolve, stats, graphics, grDevices,
 #   utils
 # Input: none
 # Output: generated/07_runs_and_trials/: snippets/*.txt, output/*.txt, signatures/*.txt,

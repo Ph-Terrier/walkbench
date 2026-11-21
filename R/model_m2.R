@@ -24,7 +24,7 @@
 #   footstrike"), one value per step.
 #   Primary estimation settings (walkbench 0.2.0, 2026-11-06): settings_m2() returns those of
 #   table 5.1 of the analysis plan, draft 0.4, approved by the author on 2026-11-06 at 12:26
-#   (register SIMACI/docs/author_decisions.md): the state variables of the model referred to
+#   (decision register of the SIM-ACI project): the state variables of the model referred to
 #   the stance leg, recovered by m2_model_coords(); settings_m2("continuous") returns the
 #   settings of draft 0.3, used by the replication runs with walkbench 0.1.x.
 # Dependencies: deSolve

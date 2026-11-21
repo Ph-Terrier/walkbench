@@ -9,6 +9,9 @@
 #   and 4.5); 21 attempts at most, fall rate, flag above 20% and inclusion at 80% (section
 #   4.4); rescaling after the transient (section 4.3); circular start and surrogates
 #   (section 4.8).
+#   walkbench 0.7.0 (2026-11-20, SP1.1 session, Claude Opus 5.5): statistical test of the
+#   autocorrelation of the series of the frozen arfima_series() (finding 3 of the external
+#   audit of the code, triage of the submission session of article P1, 2026-11-19).
 # Dependencies: testthat, walkbench
 # Input: none
 # Output: none
@@ -120,6 +123,39 @@ test_that("input_arfima() rescales the values after the transient", {
   invisible(input_arfima(100, 0.2, 1, n_transient = 20))
   expect_identical(rnorm(1), r1)
   expect_error(input_arfima(100, 0, 1, n_transient = 99), "n_transient")
+})
+
+test_that("the series of arfima_series() have the autocorrelation of ARFIMA(0,d,0) (walkbench 0.7.0)", {
+  # each realization is centered and scaled on itself, so the expected sample autocorrelation
+  # at lag k is close to E[c_k] / E[c_0], computed from the theoretical autocorrelation rho
+  # of fi_autocorrelation(); the mean over 200 realizations must lie within 4 Monte Carlo
+  # standard errors of that value at lags 1 to 5
+  w <- walkbench:::m1_walker_env()
+  n <- 256L
+  n_rep <- 200L
+  n_lag <- 5L
+  expected_acf <- function(d) {
+    rho <- fi_autocorrelation(d, n)
+    a <- rowMeans(stats::toeplitz(rho))
+    v <- mean(a)
+    ck <- vapply(seq_len(n_lag), function(k) {
+      sum(rho[k + 1] - a[1:(n - k)] - a[(k + 1):n] + v) / n
+    }, numeric(1))
+    ck / (1 - v)
+  }
+  for (d in c(-0.3, 0, 0.25, 0.45)) {
+    r <- t(vapply(seq_len(n_rep), function(s) {
+      x <- w$arfima_series(n, d, seed = 20261120L + s)
+      stats::acf(x, lag.max = n_lag, plot = FALSE)$acf[-1]
+    }, numeric(n_lag)))
+    se <- apply(r, 2, stats::sd) / sqrt(n_rep)
+    z <- (colMeans(r) - expected_acf(d)) / se
+    expect_true(all(abs(z) < 4), info = sprintf("d = %.2f", d))
+    # the test separates d from d + 0.1 at lag 1
+    if (d < 0.4) {
+      expect_gt(abs(mean(r[, 1]) - expected_acf(d + 0.1)[1]) / se[1], 4)
+    }
+  }
 })
 
 test_that("input_fixed_series() rescales the window and gives a circular start", {

@@ -2,13 +2,16 @@
 % Please edit documentation in R/predictor.R
 \name{spinal_d_grid}
 \alias{spinal_d_grid}
-\title{Separations between epochs of the SPINAL form}
+\alias{predictor_d_grid}
+\title{Separations between epochs of the analytic predictor}
 \usage{
 spinal_d_grid()
+
+predictor_d_grid()
 }
 \value{
 The grid of separations, in steps, of 07b.
 }
 \description{
-Separations between epochs of the SPINAL form
+The name \code{predictor_d_grid()}, added in walkbench 0.7.0, gives the same function.
 }

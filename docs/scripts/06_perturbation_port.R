@@ -3,10 +3,10 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
-# Description: builds inputs with the functions of the perturbation port of walkbench 0.6.2
+# Description: builds inputs with the functions of the perturbation port of walkbench 0.7.0
 #   (uniform independent values, Gaussian ARFIMA(0,d,0) series, a fixed series with a circular
 #   start and its surrogate, an input written directly, a generator defined by the user),
 #   applies them to model M1 and runs two trials through the run driver. The example is a
@@ -25,7 +25,7 @@
 #   in any example that computes them. Its standard deviation goes from 0.008 to 0.007 rad: with
 #   d = 0, at 0.008 rad, 15 of 16 attempts fell; a scan of 0.004 to 0.0075 rad (attempts 0 to 5)
 #   gave a fall in attempt 0 and a completed attempt 1 at 0.0065, 0.007 and 0.0075 rad.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), stats, graphics, grDevices
+# Dependencies: walkbench 0.7.0 (loaded by the driver), stats, graphics, grDevices
 # Input: none
 # Output: generated/06_perturbation_port/: snippets/*.txt, output/*.txt, signatures/*.txt,
 #   numbers.tex, numbers.csv, fig_inputs.pdf, fig_pulse.pdf, run_log.csv, session.txt

@@ -2,9 +2,25 @@
 % Please edit documentation in R/predictor.R
 \name{predict_spinal_levels}
 \alias{predict_spinal_levels}
-\title{Expected divergence levels of the candidate form of SPINAL}
+\alias{predictor_levels}
+\title{Expected divergence levels of the analytic predictor}
 \usage{
 predict_spinal_levels(
+  lin,
+  gam,
+  n_steps,
+  matched = TRUE,
+  k_levels = 2:4,
+  d_grid = spinal_d_grid(),
+  n_past = 60L,
+  ell_step = 5L,
+  maps = NULL,
+  separation_step = 2L,
+  terms = c("both", "durations"),
+  initial_rank_tol = NULL
+)
+
+predictor_levels(
   lin,
   gam,
   n_steps,
@@ -67,5 +83,6 @@ deviations. After k steps, their difference at local time l of the step is
 M_p (-f(l) dTheta_k + Phi(l) dx_k), a Gaussian vector; the level is half the expected log
 of its squared norm, averaged over the local time, the stance leg and D. The weights of D
 are the number of pairs at that separation times the density at zero of the initial
-difference.
+difference. The name \code{predictor_levels()}, added in walkbench 0.7.0, gives the same
+function.
 }

@@ -3,15 +3,15 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
-# Description: builds one object of each kind that the parts of walkbench 0.6.2 exchange
+# Description: builds one object of each kind that the parts of walkbench 0.7.0 exchange
 #   (model, input, run, metronome, settings of the detrended fluctuation analysis, estimation
 #   settings, linearization), prints their classes, and checks the conventions that the
 #   chapter states (numbering of the cycles, units, classes). Draws the diagram of the flow of
 #   a run and of a trial. Seed: 90,003,001 (cell 30 of the block of the guide).
-# Dependencies: walkbench 0.6.2 (loaded by the driver), graphics, grDevices
+# Dependencies: walkbench 0.7.0 (loaded by the driver), graphics, grDevices
 # Input: none
 # Output: generated/03_architecture/: snippets/*.txt, output/*.txt, numbers.tex, numbers.csv,
 #   fig_flow.pdf, run_log.csv, session.txt

@@ -5,10 +5,10 @@
 #   dispatched by the guide session of SIM-ACI (Claude Fable 5.2), without a code-generation
 #   model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: path of the package (.. in place of ../../testbed); folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: path of the package (.. in place of ../../testbed); folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-13
-# Description: reads the manifest of the pinned files of walkbench 0.6.2, checks the pinned
+# Description: reads the manifest of the pinned files of walkbench 0.7.0, checks the pinned
 #   files against it, asks for the path of one pinned file, loads the engine of RACING v1.0.2
 #   and compares the names of its functions with the exports of the package. The hidden blocks
 #   write the signatures of the functions, count the test blocks of each test file of the
@@ -18,7 +18,7 @@
 #   two copies of the engine, and the attachment of deSolve by the pinned walker file. The
 #   script draws no random number and simulates no model, so it uses none of the seeds
 #   reserved for the chapter (cells 130 to 139 of the block of the guide).
-# Dependencies: walkbench 0.6.2 (loaded by the driver), digest, tools, utils, graphics,
+# Dependencies: walkbench 0.7.0 (loaded by the driver), digest, tools, utils, graphics,
 #   grDevices
 # Input: ../tests/testthat/test-*.R and ../README.md (read only)
 # Output: generated/13_pinned_code_and_tests/: snippets/*.txt, output/*.txt,

@@ -1,2 +1,8 @@
 # Pinned files are stored and checked out byte for byte (SHA-256 of the manifest)
 inst/pinned/** -text
+# DESCRIPTION and R/*.R are checked out with LF line ends on every platform. The script of
+# chapter 14 of the user guide (docs/scripts/14_web_simulator.R) compares their SHA-256 sums
+# with those of web/validation/export_check/comparison.md, computed with LF line ends.
+# Rule added on 2026-11-21 by the SP1.1 session of SIM-ACI (Claude Opus 5.5).
+DESCRIPTION text eol=lf
+R/*.R text eol=lf

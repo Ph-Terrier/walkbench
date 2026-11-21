@@ -4,3 +4,5 @@
 ^\.zenodo\.json$
 ^\.gitignore$
 ^docs$
+^web$
+^\.github$

@@ -1,7 +1,7 @@
 Package: walkbench
 Type: Package
 Title: Testbed of Walking Models for the Divergence Exponents of Gait
-Version: 0.6.2
+Version: 0.7.0
 Authors@R:
     person("Philippe", "Terrier", , "philippe.terrier@he-arc.ch",
            role = c("aut", "cre", "cph"))

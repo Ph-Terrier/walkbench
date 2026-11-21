@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "produced_by": "tools/03_fall_rates.js, written by Claude Opus 5.5 (orchestrating model of the web-simulator session of SIM-ACI)",
+    "date": "2026-11-20",
+    "runtime": "Deno 1.46.3 (V8 12.9.202.5-rusty)",
+    "runs_per_amplitude": 60,
+    "max_steps": 2000,
+    "seeds": "1001 to 1060",
+    "d": 0,
+    "sigma_max": {
+      "M1": 0.0039,
+      "M2": 0.0003
+    },
+    "model_time_per_second_at_speed_1": 2.9
+  },
+  "rows": [
+    {
+      "model": "M1",
+      "multiple": 1,
+      "sigma": 0.0039,
+      "runs": 60,
+      "falls": 0,
+      "median_steps": null,
+      "share_within_40_steps": 0,
+      "median_seconds_speed_1": null,
+      "step_period": 3.882463752851411,
+      "seconds_of_computation": 76.36
+    },
+    {
+      "model": "M1",
+      "multiple": 1.5,
+      "sigma": 0.00585,
+      "runs": 60,
+      "falls": 48,
+      "median_steps": 748,
+      "share_within_40_steps": 0.016666666666666666,
+      "median_seconds_speed_1": 1001.4078921147777,
+      "step_period": 3.882463752851411,
+      "seconds_of_computation": 35.044
+    },
+    {
+      "model": "M1",
+      "multiple": 2,
+      "sigma": 0.0078,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 90.5,
+      "share_within_40_steps": 0.26666666666666666,
+      "median_seconds_speed_1": 121.15964470105266,
+      "step_period": 3.882463752851411,
+      "seconds_of_computation": 4.774
+    },
+    {
+      "model": "M1",
+      "multiple": 3,
+      "sigma": 0.0117,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 19.5,
+      "share_within_40_steps": 0.8,
+      "median_seconds_speed_1": 26.10622178641466,
+      "step_period": 3.882463752851411,
+      "seconds_of_computation": 0.984
+    },
+    {
+      "model": "M1",
+      "multiple": 4,
+      "sigma": 0.0156,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 10,
+      "share_within_40_steps": 0.9666666666666667,
+      "median_seconds_speed_1": 13.38780604431521,
+      "step_period": 3.882463752851411,
+      "seconds_of_computation": 0.544
+    },
+    {
+      "model": "M1",
+      "multiple": 5,
+      "sigma": 0.0195,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 8,
+      "share_within_40_steps": 1,
+      "median_seconds_speed_1": 10.710244835452169,
+      "step_period": 3.882463752851411,
+      "seconds_of_computation": 0.4
+    },
+    {
+      "model": "M2",
+      "multiple": 1,
+      "sigma": 0.0003,
+      "runs": 60,
+      "falls": 0,
+      "median_steps": null,
+      "share_within_40_steps": 0,
+      "median_seconds_speed_1": null,
+      "step_period": 1.344410365076419,
+      "seconds_of_computation": 151.964
+    },
+    {
+      "model": "M2",
+      "multiple": 1.5,
+      "sigma": 0.00045,
+      "runs": 60,
+      "falls": 0,
+      "median_steps": null,
+      "share_within_40_steps": 0,
+      "median_seconds_speed_1": null,
+      "step_period": 1.344410365076419,
+      "seconds_of_computation": 105.552
+    },
+    {
+      "model": "M2",
+      "multiple": 2,
+      "sigma": 0.0006,
+      "runs": 60,
+      "falls": 57,
+      "median_steps": 647.5,
+      "share_within_40_steps": 0,
+      "median_seconds_speed_1": 300.1743832368901,
+      "step_period": 1.344410365076419,
+      "seconds_of_computation": 27.39
+    },
+    {
+      "model": "M2",
+      "multiple": 3,
+      "sigma": 0.0009,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 39.5,
+      "share_within_40_steps": 0.55,
+      "median_seconds_speed_1": 18.31179635190295,
+      "step_period": 1.344410365076419,
+      "seconds_of_computation": 1.62
+    },
+    {
+      "model": "M2",
+      "multiple": 4,
+      "sigma": 0.0012,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 17,
+      "share_within_40_steps": 0.9833333333333333,
+      "median_seconds_speed_1": 7.881026278034181,
+      "step_period": 1.344410365076419,
+      "seconds_of_computation": 0.58
+    },
+    {
+      "model": "M2",
+      "multiple": 5,
+      "sigma": 0.0015,
+      "runs": 60,
+      "falls": 60,
+      "median_steps": 11,
+      "share_within_40_steps": 1,
+      "median_seconds_speed_1": 5.099487591669176,
+      "step_period": 1.344410365076419,
+      "seconds_of_computation": 0.4
+    }
+  ]
+}

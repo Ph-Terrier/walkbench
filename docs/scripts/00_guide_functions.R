@@ -3,7 +3,7 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder named in a comment (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder named in a comment (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
 # Description: functions that the example scripts of the guide call to register a number

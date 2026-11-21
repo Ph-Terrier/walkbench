@@ -1,0 +1,276 @@
+{
+  "produced_by": "tests/run_tests_m1.js, written by the orchestrating model of the web-simulator session of SIM-ACI (Claude Opus 5.5)",
+  "date": "2026-11-21T13:55:35.210Z",
+  "runtime": "Deno 1.46.3, V8 12.9.202.5-rusty",
+  "vectors": {
+    "walkbench_version": "0.7.0",
+    "git_commit": "754de72b70677dc048b3d7949322e79cf7704546",
+    "date": "2026-11-21T11:05:09+0100",
+    "r_version": "R version 4.5.1 (2025-06-13 ucrt)"
+  },
+  "tolerances": {
+    "fixedPoint": 1e-9,
+    "eigMod": 0.0001,
+    "run": 1e-7,
+    "sameInput": 1e-9,
+    "endToEndLambda": 0.0001,
+    "endToEndAlpha": 0.000001
+  },
+  "n_tests": 34,
+  "n_failed": 0,
+  "results": [
+    {
+      "id": "T1",
+      "label": "fixed point (theta, theta_dot) and period, against walkbench at rtol 1e-13",
+      "max_abs_diff": 1.1901590823981678e-12,
+      "tolerance": 1e-9,
+      "pass": true,
+      "ms": 22
+    },
+    {
+      "id": "T1b",
+      "label": "fixed point and period, against walkbench at its default tolerances (information)",
+      "max_abs_diff": 1.9348060931179134e-9,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T2",
+      "label": "eigenvalue moduli of the linearized step map (linearize())",
+      "max_abs_diff": 8.136668117053603e-9,
+      "tolerance": 0.0001,
+      "pass": true,
+      "ms": 10
+    },
+    {
+      "id": "T2b",
+      "label": "eigenvalue moduli, against the forward differences of fixed_point() (information)",
+      "max_abs_diff": 1.3721554126266966e-7,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T2c",
+      "label": "J, b, a, e and static gain of linearize() (information)",
+      "max_abs_diff": 0.000002307636792764356,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T3",
+      "label": "ARFIMA inputs from the normal draws of R (5 series, d from -0.30 to 0.45)",
+      "max_abs_diff": 1.1449174941446927e-16,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "T4",
+      "label": "fixed series: rescaling and circular start",
+      "max_abs_diff": 4.336808689942018e-19,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "T5",
+      "label": "run of 620 steps: step durations, against walkbench at rtol 1e-13",
+      "max_abs_diff": 1.5432100042289676e-11,
+      "tolerance": 1e-7,
+      "pass": true,
+      "ms": 274
+    },
+    {
+      "id": "T5f",
+      "label": "run of 620 steps: start and end times of the steps, cumulated over the run, against walkbench at rtol 1e-13",
+      "max_abs_diff": 3.4924596548080444e-10,
+      "tolerance": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "T5g",
+      "label": "run of 620 steps: durations and cumulated times, against walkbench at its default tolerances (information)",
+      "max_abs_diff": 2.1164396457606927e-7,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T5b",
+      "label": "run of 620 steps: post-strike states (theta, theta_dot)",
+      "max_abs_diff": 9.462824968053951e-11,
+      "tolerance": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "T5c",
+      "label": "run of 620 steps: no fall, same number of steps, of samples and same legs",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true,
+      "detail": "steps 620 / 620, samples 80207 / 80207"
+    },
+    {
+      "id": "T5d",
+      "label": "run of 620 steps: sample times of steps 1, 2, 310, 311, 619, 620",
+      "max_abs_diff": 4.547473508864641e-13,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "T5e",
+      "label": "run of 620 steps: sampled states of the same steps, against walkbench at rtol 1e-13",
+      "max_abs_diff": 1.2793305304015234e-10,
+      "tolerance": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "T5h",
+      "label": "run of 620 steps: sampled states of the same steps, against walkbench at its default tolerances (information)",
+      "max_abs_diff": 7.831494383547799e-8,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T6",
+      "label": "run that falls (seed 1001, sd 0.006): same step of the fall",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true,
+      "detail": "fall at step 40 / 40 (stance angle reached 1.2 rad in absolute value)"
+    },
+    {
+      "id": "T6b",
+      "label": "run that falls: durations of the steps before the fall",
+      "max_abs_diff": 2.104010743408935e-9,
+      "tolerance": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "T7",
+      "label": "short run, settings of the plan: divergence curve, smoothed curve and local slopes",
+      "max_abs_diff": 2.964295475749168e-14,
+      "tolerance": 1e-9,
+      "pass": true,
+      "ms": 246
+    },
+    {
+      "id": "T7b",
+      "label": "short run, settings of the plan: lambda_S and lambda_L (per time unit and per step)",
+      "max_abs_diff": 9.298117831235686e-16,
+      "tolerance": 1e-9,
+      "pass": true,
+      "detail": "lambda_S 0.42651805157206313, lambda_L 0.020684163798008134"
+    },
+    {
+      "id": "T7c",
+      "label": "short run, settings of the plan: same neighbors, number of pairs, horizon and Theiler window",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true,
+      "detail": "neighbors differing 0; pairs 13306 / 13306; horizon 517 / 517; Theiler 259 / 259"
+    },
+    {
+      "id": "T8",
+      "label": "short run, windows 0-0.2 and 4-6 steps: divergence curve, smoothed curve and local slopes",
+      "max_abs_diff": 2.964295475749168e-14,
+      "tolerance": 1e-9,
+      "pass": true,
+      "ms": 330
+    },
+    {
+      "id": "T8b",
+      "label": "short run, windows 0-0.2 and 4-6 steps: lambda_S and lambda_L (per time unit and per step)",
+      "max_abs_diff": 0,
+      "tolerance": 1e-9,
+      "pass": true,
+      "detail": "lambda_S 0.4553203334375885, lambda_L 0.019695488685622407"
+    },
+    {
+      "id": "T8c",
+      "label": "short run, windows 0-0.2 and 4-6 steps: same neighbors, number of pairs, horizon and Theiler window",
+      "max_abs_diff": 0,
+      "tolerance": 0,
+      "pass": true,
+      "detail": "neighbors differing 0; pairs 12659 / 12659; horizon 776 / 776; Theiler 259 / 259"
+    },
+    {
+      "id": "T9",
+      "label": "DFA alpha on the values of R (5 series, one too short)",
+      "max_abs_diff": 2.7755575615628914e-16,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "T10",
+      "label": "end to end: lambda_S and lambda_L (per time unit and per step)",
+      "max_abs_diff": 0.000028439829918625037,
+      "tolerance": 0.0001,
+      "pass": true,
+      "ms": 1304,
+      "detail": "JavaScript lambda_S 0.6014767756309833, lambda_L 0.03067455406389653; walkbench 0.601469447589853, 0.030680159432545772"
+    },
+    {
+      "id": "T10b",
+      "label": "end to end: alpha of the input, of the command, of the step and stride durations",
+      "max_abs_diff": 1.831661489148928e-10,
+      "tolerance": 0.000001,
+      "pass": true
+    },
+    {
+      "id": "T10c",
+      "label": "end to end: mean, standard deviation and coefficient of variation of the step durations",
+      "max_abs_diff": 3.421232186440193e-10,
+      "tolerance": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "T10d",
+      "label": "end to end: number of complete pairs (information)",
+      "max_abs_diff": 1,
+      "tolerance": null,
+      "pass": null,
+      "detail": "76804 / 76803"
+    },
+    {
+      "id": "T11",
+      "label": "short run: durations of the kept steps",
+      "max_abs_diff": 1.378918756955727e-9,
+      "tolerance": 1e-7,
+      "pass": true,
+      "detail": "samples 14231 / 14231"
+    },
+    {
+      "id": "T12",
+      "label": "walkbench at its default tolerances against walkbench at rtol 1e-13: period (information)",
+      "max_abs_diff": 1.9359962522003116e-9,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T12b",
+      "label": "walkbench at its default tolerances against walkbench at rtol 1e-13: end time of the run (information)",
+      "max_abs_diff": 2.1198366084718145e-7,
+      "tolerance": null,
+      "pass": null
+    },
+    {
+      "id": "T13",
+      "label": "generator of the page: uniform draws of runif() after set.seed() (5 seeds)",
+      "max_abs_diff": 0,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "T13b",
+      "label": "generator of the page: normal draws of rnorm() after set.seed() (5 seeds, 1000 draws each)",
+      "max_abs_diff": 8.881784197001252e-16,
+      "tolerance": 1e-9,
+      "pass": true
+    },
+    {
+      "id": "T13c",
+      "label": "input_arfima() from the seed alone, generator of the page (5 series)",
+      "max_abs_diff": 1.1449174941446927e-16,
+      "tolerance": 1e-9,
+      "pass": true
+    }
+  ]
+}

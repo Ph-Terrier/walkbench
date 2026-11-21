@@ -2,9 +2,12 @@
 % Please edit documentation in R/predictor.R
 \name{spinal_settings_m2}
 \alias{spinal_settings_m2}
+\alias{predictor_settings_m2}
 \title{Settings of the predictor for M2 (update 1 of the analysis plan)}
 \usage{
 spinal_settings_m2(lin, n_steps)
+
+predictor_settings_m2(lin, n_steps)
 }
 \arguments{
 \item{lin}{linearization of M2, from \code{\link[=linearize]{linearize()}}.}
@@ -24,4 +27,5 @@ past inputs of \code{\link[=spinal_n_past]{spinal_n_past()}}. The grid without t
 sensitivity analysis. Update 2 of the registration (\code{SIMACI/docs/osf/SIMACI_update_2.md}, commit
 f5f3be8) matches the epochs on the subspace that the input reaches, with the
 relative threshold 1e-8 (\code{initial_rank_tol}); in M2 this subspace has three dimensions.
+The name \code{predictor_settings_m2()}, added in walkbench 0.7.0, gives the same function.
 }

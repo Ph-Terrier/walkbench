@@ -4,10 +4,10 @@
 #   the guide session of SIM-ACI, dispatched by the guide session (Claude Fable 5.2), without a
 #   code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-13 (written in the night of 2026-11-12 to 2026-11-13, machine clock)
-# Description: applies the closed-loop port of walkbench 0.6.2 to model M1. The script
+# Description: applies the closed-loop port of walkbench 0.7.0 to model M1. The script
 #   linearizes the model, shows what a controller receives and returns, compares a run under
 #   the controller of variant H3a at a gain of zero with the open-loop run, runs the
 #   controllers of variants H3a and H3b at a gain of 0.1, computes the gain scales, the
@@ -22,7 +22,7 @@
 #   write the signatures of the functions, register the numbers quoted in the chapter, check
 #   the statements of the text and draw its two figures; the other blocks are printed in the
 #   chapter with their output.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), stats, graphics, grDevices
+# Dependencies: walkbench 0.7.0 (loaded by the driver), stats, graphics, grDevices
 # Input: none
 # Output: generated/09_closed_loop_port/: snippets/*.txt, output/*.txt, signatures/*.txt,
 #   numbers.tex, numbers.csv, fig_radius.pdf, fig_asynchrony.pdf, run_log.csv, session.txt

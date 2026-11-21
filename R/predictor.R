@@ -15,6 +15,11 @@
 #   matching on the subspace that the input reaches, part of spinal_settings_m2() under update 2
 #   of the registration (SIMACI/docs/osf/SIMACI_update_2.md, commit f5f3be8, approved on OSF on
 #   2026-11-07).
+#   walkbench 0.7.0 (2026-11-20, same session): help pages without the name of the
+#   sub-project (decision 7 of the author of 2026-11-18) and the aliases predictor_levels(),
+#   predictor_d_grid(), predictor_lambda_l_m1(), predictor_lambda_l_lsq(), predictor_n_past()
+#   and predictor_settings_m2() (names chosen by the author on 2026-11-20); the former names
+#   stay valid. The comments keep their references to the scripts of origin.
 # Date: 2026-11-06
 # Description: the candidate form of SPINAL (lots2_4_resultats.md, section 2.2) gives the
 #   expected mean log divergence after k steps from the linearization of the step map
@@ -82,7 +87,9 @@ sample_autocovariance <- function(x, n_lags) {
   vapply(0:(n_lags - 1L), function(h) sum(y[seq_len(n - h)] * y[(h + 1L):n]) / n, numeric(1))
 }
 
-#' Separations between epochs of the SPINAL form
+#' Separations between epochs of the analytic predictor
+#'
+#' The name `predictor_d_grid()`, added in walkbench 0.7.0, gives the same function.
 #'
 #' @return The grid of separations, in steps, of 07b.
 #' @export
@@ -100,14 +107,15 @@ e_ln_quadratic_form <- function(sigma) {
     stats::integrate(f, 1, Inf, rel.tol = 1e-7)$value
 }
 
-#' Expected divergence levels of the candidate form of SPINAL
+#' Expected divergence levels of the analytic predictor
 #'
 #' Two epochs of one record, D steps apart, are matched at the start by equal post-contact
 #' deviations. After k steps, their difference at local time l of the step is
 #' M_p (-f(l) dTheta_k + Phi(l) dx_k), a Gaussian vector; the level is half the expected log
 #' of its squared norm, averaged over the local time, the stance leg and D. The weights of D
 #' are the number of pairs at that separation times the density at zero of the initial
-#' difference.
+#' difference. The name `predictor_levels()`, added in walkbench 0.7.0, gives the same
+#' function.
 #'
 #' @param lin linearization of the model, from [linearize()].
 #' @param gam autocovariance of the input from lag 0, one value per step; at least
@@ -226,10 +234,11 @@ predict_spinal_levels <- function(lin, gam, n_steps, matched = TRUE, k_levels = 
        initial_rank = nrow(p0c))
 }
 
-#' Predicted long-term exponent of M1 from the levels of the SPINAL form
+#' Predicted long-term exponent of M1 from the levels of the analytic predictor
 #'
 #' (y(4 steps) - y(3 steps)) / T, per unit of model time, the quantity that M1 averages over
-#' its window of 3 to 4 steps (07b).
+#' its window of 3 to 4 steps (07b). The name `predictor_lambda_l_m1()`, added in walkbench
+#' 0.7.0, gives the same function.
 #'
 #' @param pred result of [predict_spinal_levels()] with levels at 3 and 4 steps.
 #' @return The predicted lambda_L of M1.
@@ -243,7 +252,7 @@ spinal_lambda_l_m1 <- function(pred) {
 #' The smallest n for which `rho^n <= tol` and the Euclidean norm of J^n b over the state
 #' variables is at most `tol` times that of b (J: step map; b: response of the state to the
 #' input). The update states rho = 0.923, the largest eigenvalue modulus of M2 rounded to three
-#' decimals.
+#' decimals. The name `predictor_n_past()`, added in walkbench 0.7.0, gives the same function.
 #'
 #' @param lin linearization of the model, from [linearize()].
 #' @param rho modulus of the first condition.
@@ -276,6 +285,7 @@ spinal_n_past <- function(lin, rho = 0.923, tol = 1e-4, n_max = 10000L) {
 #' sensitivity analysis. Update 2 of the registration (`SIMACI/docs/osf/SIMACI_update_2.md`, commit
 #' f5f3be8) matches the epochs on the subspace that the input reaches, with the
 #' relative threshold 1e-8 (`initial_rank_tol`); in M2 this subspace has three dimensions.
+#' The name `predictor_settings_m2()`, added in walkbench 0.7.0, gives the same function.
 #'
 #' @param lin linearization of M2, from [linearize()].
 #' @param n_steps number of steps of the record (600 or 1,200).
@@ -295,7 +305,8 @@ spinal_settings_m2 <- function(lin, n_steps) {
 #' Predicted long-term exponent from a least-squares slope of the levels
 #'
 #' The least-squares slope of y(K) on K, times `factor`. For M2 (update 1, rule E3), the
-#' levels are K = 8 to 20 steps and the factor is 2, which gives lambda_L per stride.
+#' levels are K = 8 to 20 steps and the factor is 2, which gives lambda_L per stride. The name
+#' `predictor_lambda_l_lsq()`, added in walkbench 0.7.0, gives the same function.
 #'
 #' @param pred result of [predict_spinal_levels()].
 #' @param factor steps per unit of the exponent (2 for an exponent per stride).
@@ -309,7 +320,8 @@ spinal_lambda_l_lsq <- function(pred, factor = 2) {
 #' Slope of half the log variance of sums over a window
 #'
 #' v(K) is the variance of the sum of K consecutive values; the slope is the least-squares
-#' slope of 0.5 ln v(K) on K over `k_window`, as in 10_ar1_against_fi.R of SPINAL.
+#' slope of 0.5 ln v(K) on K over `k_window`, as in the script `10_ar1_against_fi.R` of the
+#' repository "time series R" of the author.
 #'
 #' @param rho autocorrelations from lag 0, at least `max(k_window)` lags.
 #' @param k_window values of K, in values of the series.
@@ -326,7 +338,8 @@ window_slope_half_log_v <- function(rho, k_window) {
 #' FI level with the same window slope as an AR(1) series
 #'
 #' The value d_phi for which the slope of 0.5 ln v(K) over `k_window` equals that of the AR(1)
-#' series (analysis plan, section 4.9); root of the difference on (-0.45, 0.49), as in SPINAL.
+#' series (analysis plan, section 4.9); root of the difference on (-0.45, 0.49), as in the
+#' reference scripts of the predictor (repository "time series R" of the author).
 #'
 #' @param phi coefficient of the AR(1) series.
 #' @param k_window values of K, in steps (the plan: 4 to 8 steps).
@@ -338,3 +351,30 @@ match_fi_to_ar1 <- function(phi, k_window) {
   stats::uniroot(function(d) window_slope_half_log_v(fi_autocorrelation(d, n), k_window) - target,
                  c(-0.45, 0.49), tol = 1e-10)$root
 }
+
+# Aliases of walkbench 0.7.0: neutral names of the functions of the predictor, chosen by the
+# author on 2026-11-20; the former names stay valid
+
+#' @rdname predict_spinal_levels
+#' @export
+predictor_levels <- predict_spinal_levels
+
+#' @rdname spinal_d_grid
+#' @export
+predictor_d_grid <- spinal_d_grid
+
+#' @rdname spinal_lambda_l_m1
+#' @export
+predictor_lambda_l_m1 <- spinal_lambda_l_m1
+
+#' @rdname spinal_lambda_l_lsq
+#' @export
+predictor_lambda_l_lsq <- spinal_lambda_l_lsq
+
+#' @rdname spinal_n_past
+#' @export
+predictor_n_past <- spinal_n_past
+
+#' @rdname spinal_settings_m2
+#' @export
+predictor_settings_m2 <- spinal_settings_m2

@@ -2,9 +2,12 @@
 % Please edit documentation in R/predictor.R
 \name{spinal_n_past}
 \alias{spinal_n_past}
+\alias{predictor_n_past}
 \title{Number of past inputs of an epoch (update 1 of the analysis plan, rule E4)}
 \usage{
 spinal_n_past(lin, rho = 0.923, tol = 1e-04, n_max = 10000L)
+
+predictor_n_past(lin, rho = 0.923, tol = 1e-04, n_max = 10000L)
 }
 \arguments{
 \item{lin}{linearization of the model, from \code{\link[=linearize]{linearize()}}.}
@@ -22,5 +25,5 @@ The number of past inputs, an integer.
 The smallest n for which \code{rho^n <= tol} and the Euclidean norm of J^n b over the state
 variables is at most \code{tol} times that of b (J: step map; b: response of the state to the
 input). The update states rho = 0.923, the largest eigenvalue modulus of M2 rounded to three
-decimals.
+decimals. The name \code{predictor_n_past()}, added in walkbench 0.7.0, gives the same function.
 }

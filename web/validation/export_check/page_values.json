@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "produced_by": "validation/export_check/page_values.js, written by Claude Opus 5.5 (orchestrating model of the web-simulator session of SIM-ACI)",
+    "date": "2026-11-21",
+    "runtime": "Deno 1.46.3 (V8 12.9.202.5-rusty)"
+  },
+  "cases": {
+    "m1_arfima": {
+      "model": "M1",
+      "source": "arfima",
+      "seed": 7,
+      "n_transient": 20,
+      "lambda_s": 0.6170760692318084,
+      "lambda_l": 0.04170395237716912,
+      "n_pairs": 76480,
+      "alpha_input": 0.6455231036601857,
+      "alpha_duration": 0.5603498340629177
+    },
+    "m2_arfima": {
+      "model": "M2",
+      "source": "arfima",
+      "seed": 1,
+      "n_transient": 34,
+      "lambda_s": 2.982776124300627,
+      "lambda_l": 0.027093286908453196,
+      "n_pairs": 28117,
+      "alpha_input": 0.49008036871936045,
+      "alpha_duration": 0.45158125958520523
+    },
+    "m1_file": {
+      "model": "M1",
+      "source": "file",
+      "seed": null,
+      "n_transient": 20,
+      "lambda_s": 0.6269803045500482,
+      "lambda_l": 0.04626412538989104,
+      "n_pairs": 76741,
+      "alpha_input": 0.5686609701200419,
+      "alpha_duration": 0.5170650094676839
+    },
+    "m2_file": {
+      "model": "M2",
+      "source": "file",
+      "seed": null,
+      "n_transient": 34,
+      "lambda_s": 2.366796988682328,
+      "lambda_l": 0.05481553444803336,
+      "n_pairs": 28157,
+      "alpha_input": 0.5686609701200418,
+      "alpha_duration": 0.5424704996659713
+    }
+  }
+}

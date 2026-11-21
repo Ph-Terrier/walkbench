@@ -3,16 +3,16 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
-# Description: builds one object of each kind that walkbench 0.6.2 creates (model, input, run
+# Description: builds one object of each kind that walkbench 0.7.0 creates (model, input, run
 #   with its table of events, linearization, result of a trial, estimation settings of M1 and
 #   M2, summary row) and writes, for each one, a table of its fields with the type of each
 #   field as R reports it. The tables are a compact reference; the chapters describe the
 #   content of the fields. The script prints no code block: every block is hidden. Seeds:
 #   90,014,001 upward (cell 140 of the block of the guide).
-# Dependencies: walkbench 0.6.2 (loaded by the driver), utils
+# Dependencies: walkbench 0.7.0 (loaded by the driver), utils
 # Input: none
 # Output: generated/B_objects/: tables.tex, numbers.tex, numbers.csv, run_log.csv, session.txt
 # Usage: from docs/:

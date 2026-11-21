@@ -4,10 +4,11 @@
 #   dispatched by the guide session of SIM-ACI (Claude Fable 5.2), without a code-generation
 #   model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
-# Date: 2026-11-13
-# Description: demonstrates the twelve functions of the analytic predictor of walkbench 0.6.2.
+# Date: 2026-11-13; changed on 2026-11-21 by the guide session (Claude Fable 5.2) for version
+#   0.7.0: names predictor_* of the six functions that have two names, and check of the names
+# Description: demonstrates the twelve functions of the analytic predictor of walkbench 0.7.0.
 #   The script computes the autocorrelations of a fractionally integrated series and of an
 #   AR(1) series, the autocovariance of an uncorrelated input centered and rescaled over a
 #   series of 320 values, and the sample autocovariance of one generated uncorrelated input.
@@ -22,7 +23,7 @@
 #   The blocks whose label starts with "hidden:" write the signatures of the functions,
 #   register the numbers quoted in the chapter, make the checks that the text relies on and
 #   draw the figure; the other blocks are printed in the chapter with their output.
-# Dependencies: walkbench 0.6.2 (loaded by the driver), stats, graphics, grDevices
+# Dependencies: walkbench 0.7.0 (loaded by the driver), stats, graphics, grDevices
 # Input: none
 # Output: generated/12_analytic_predictor/: snippets/*.txt, output/*.txt, signatures/*.txt,
 #   numbers.tex, numbers.csv, fig_weights.pdf, run_log.csv, session.txt
@@ -44,11 +45,24 @@ signature_group <- function(group, functions) {
 dir.create(file.path(guide_dir(), "signatures"), showWarnings = FALSE)
 signature_group("group_autocovariance", c("fi_autocorrelation", "ar1_autocorrelation",
                                           "centered_autocovariance", "sample_autocovariance"))
-signature_group("group_levels", c("spinal_d_grid", "predict_spinal_levels",
-                                  "spinal_lambda_l_m1", "spinal_lambda_l_lsq"))
-signature_group("group_settings_m2", c("spinal_n_past", "spinal_settings_m2"))
+signature_group("group_levels", c("predictor_d_grid", "predictor_levels",
+                                  "predictor_lambda_l_m1", "predictor_lambda_l_lsq"))
+signature_group("group_settings_m2", c("predictor_n_past", "predictor_settings_m2"))
 signature_group("group_matching", c("window_slope_half_log_v", "match_fi_to_ar1"))
-if (length(formals(spinal_d_grid)) != 0L) stop("spinal_d_grid() was expected to have no argument")
+if (length(formals(predictor_d_grid)) != 0L) stop("predictor_d_grid() was expected to have no argument")
+# post-generation addition by the guide session (Claude Fable 5.2), 2026-11-21, for version
+# 0.7.0: the chapter states that each name of version 0.6.2 gives the same function as the
+# name of version 0.7.0 (table "Functions of the analytic predictor that have two names")
+former_names <- c(predictor_d_grid = "spinal_d_grid", predictor_levels = "predict_spinal_levels",
+                  predictor_lambda_l_m1 = "spinal_lambda_l_m1",
+                  predictor_lambda_l_lsq = "spinal_lambda_l_lsq",
+                  predictor_n_past = "spinal_n_past",
+                  predictor_settings_m2 = "spinal_settings_m2")
+for (new_name in names(former_names)) {
+  if (!identical(get(new_name), get(former_names[[new_name]]))) {
+    stop("the names ", new_name, " and ", former_names[[new_name]], " give two functions")
+  }
+}
 col <- guide_colors()
 msg_of <- function(expr) tryCatch({ expr; "no error" }, error = conditionMessage)
 
@@ -74,7 +88,7 @@ n_keep <- 300L
 n_total <- transient_cycles(m1) + n_keep
 sd_u <- 0.002                    # standard deviation of the input (rad)
 # lags of the default call: n_past + max(k_levels) + max(d_grid)
-n_lags <- 60 + 4 + max(spinal_d_grid())
+n_lags <- 60 + 4 + max(predictor_d_grid())
 rho_0 <- fi_autocorrelation(d = 0, n_lags = n_lags)
 cg <- centered_autocovariance(rho_0, n_center = n_total, sd = sd_u)
 cg$vbar
@@ -98,7 +112,7 @@ guide_number("n_transient", n_transient, "%d", "transient cycles of M1, transien
 guide_number("n_keep", n_keep, "%d", "kept steps of the example of M1")
 guide_number("n_total", n_total, "%d", "values of the input of the example of M1, transient cycles included")
 guide_number("sd_u", 1000 * sd_u, "%.0f", "standard deviation of the input of M1, in 1e-3 rad")
-guide_number("n_lags", n_lags, "%d", "lags that the default call of predict_spinal_levels() needs: 60 + 4 + 500")
+guide_number("n_lags", n_lags, "%d", "lags that the default call of predictor_levels() needs: 60 + 4 + 500")
 guide_number("vbar_0_pct", 100 * cg$vbar, "%.2f", "share vbar of an uncorrelated series centered over 320 values, in percent")
 guide_number("vbar_p_pct", 100 * vbar_p, "%.1f", "share vbar of a fractionally integrated series with d = 0.3 centered over 320 values, in percent")
 guide_number("gam_ratio_1", cg$gam[2] / sd_u^2, "%.4f", "centered autocovariance of the uncorrelated input beyond lag 0, as a ratio to sd^2")
@@ -108,10 +122,10 @@ t_m1 <- Sys.time()
 
 ## ---- prediction-m1 ----
 lin <- linearize(m1)
-pred <- predict_spinal_levels(lin, cg$gam, n_steps = n_keep)
+pred <- predictor_levels(lin, cg$gam, n_steps = n_keep)
 round(pred$levels, 4)
 round(pred$weights, 3)
-spinal_lambda_l_m1(pred)
+predictor_lambda_l_m1(pred)
 
 ## ---- hidden: numbers-prediction-m1 ----
 guide_number("pred_m1_seconds", as.numeric(difftime(Sys.time(), t_m1, units = "secs")), "%.0f",
@@ -120,12 +134,12 @@ if (!identical(lin$model, "M1") || length(lin$b_vec) != 2L) stop("the linearizat
 if (!identical(names(pred), c("levels", "weights", "period", "initial_rank"))) stop("the result was expected to have four elements")
 if (abs(sum(pred$weights) - 1) > 1e-12) stop("the weights were expected to sum to 1")
 if (any(pred$weights[c("D=400", "D=500")] != 0)) stop("the nodes above the record were expected to have a weight of zero")
-lambda_m1 <- spinal_lambda_l_m1(pred)
+lambda_m1 <- predictor_lambda_l_m1(pred)
 if (!isTRUE(all.equal(lambda_m1, unname(pred$levels[["k=4"]] - pred$levels[["k=3"]]) / lin$period))) {
-  stop("spinal_lambda_l_m1() was expected to equal (y(4) - y(3)) / T*")
+  stop("predictor_lambda_l_m1() was expected to equal (y(4) - y(3)) / T*")
 }
-# separations that each node receives, with the rule of predict_spinal_levels()
-grid <- spinal_d_grid()
+# separations that each node receives, with the rule of predictor_levels()
+grid <- predictor_d_grid()
 if (!identical(grid, c(2L, 4L, 6L, 8L, 10L, 14L, 20L, 30L, 50L, 80L, 120L, 200L, 300L, 400L, 500L))) {
   stop("the default nodes differ from those quoted in the chapter")
 }
@@ -148,10 +162,10 @@ guide_number("w_max_from", min(d_all[near == i_max]), "%d", "smallest separation
 guide_number("w_max_to", max(d_all[near == i_max]), "%d", "largest separation assigned to the node with the largest weight")
 # check of a statement of the text on the function: an autocovariance multiplied by s^2
 # adds ln(s) to every level and leaves the weights and the differences of levels unchanged
-pred_scale <- predict_spinal_levels(lin, 4 * cg$gam, n_steps = n_keep)
+pred_scale <- predictor_levels(lin, 4 * cg$gam, n_steps = n_keep)
 if (!isTRUE(all.equal(unname(pred_scale$levels - pred$levels), rep(log(2), 3), tolerance = 1e-8)) ||
     !isTRUE(all.equal(pred_scale$weights, pred$weights)) ||
-    abs(spinal_lambda_l_m1(pred_scale) - lambda_m1) > 1e-8) {
+    abs(predictor_lambda_l_m1(pred_scale) - lambda_m1) > 1e-8) {
   stop("an input twice as large was expected to add ln 2 to each level and to keep the weights")
 }
 
@@ -175,21 +189,21 @@ t_m2 <- Sys.time()
 ## ---- model-m2 ----
 m2 <- model_m2()
 lin2 <- linearize(m2)
-st <- spinal_settings_m2(lin2, n_steps = 600)
+st <- predictor_settings_m2(lin2, n_steps = 600)
 c(n_past = st$n_past, n_nodes = length(st$d_grid))
-spinal_n_past(lin2, rho = max(Mod(lin2$eig)))
+predictor_n_past(lin2, rho = max(Mod(lin2$eig)))
 n_total2 <- transient_cycles(m2) + 600L
 n_lags2 <- st$n_past + max(st$k_levels) + max(st$d_grid)
 rho_0 <- fi_autocorrelation(d = 0, n_lags = n_lags2)
 cg2 <- centered_autocovariance(rho_0, n_center = n_total2, sd = 5e-5)
-pred2 <- predict_spinal_levels(lin2, cg2$gam, n_steps = 600,
+pred2 <- predictor_levels(lin2, cg2$gam, n_steps = 600,
                                k_levels = st$k_levels, d_grid = st$d_grid,
                                n_past = st$n_past, maps = st$maps,
                                separation_step = st$separation_step,
                                initial_rank_tol = st$initial_rank_tol)
 c(n_lags = n_lags2, initial_rank = pred2$initial_rank)
 round(pred2$levels[c("k=8", "k=14", "k=20")], 4)
-spinal_lambda_l_lsq(pred2)
+predictor_lambda_l_lsq(pred2)
 
 ## ---- hidden: numbers-model-m2 ----
 guide_number("pred_m2_seconds", as.numeric(difftime(Sys.time(), t_m2, units = "secs")), "%.0f",
@@ -203,7 +217,7 @@ if (!identical(st$separation_step, 1L) || !identical(st$k_levels, 8:20) || !iden
 }
 if (!identical(st$d_grid, c(2:20, 30L, 50L, 80L, 120L, 200L, 300L, 400L, 500L))) stop("the grid of M2 differs from that of the table of the chapter")
 if (!identical(st$d_grid, st$d_grid_sensitivity)) stop("the two grids were expected to be equal for a record of 600 steps")
-st1200 <- spinal_settings_m2(lin2, 1200L)
+st1200 <- predictor_settings_m2(lin2, 1200L)
 if (!identical(st1200$d_grid, c(st$d_grid, 700L, 900L, 1000L)) || !identical(st1200$d_grid_sensitivity, st$d_grid)) {
   stop("the grids of M2 for 1,200 steps differ from those of the table of the chapter")
 }
@@ -216,17 +230,17 @@ norm_ratio <- function(n) {
 }
 n_second <- 1L
 while (norm_ratio(n_second) > 1e-4) n_second <- n_second + 1L
-if (spinal_n_past(lin2) != max(n_first, n_second)) stop("n_past was expected to be the larger of the two conditions")
+if (predictor_n_past(lin2) != max(n_first, n_second)) stop("n_past was expected to be the larger of the two conditions")
 guide_number("m2_state", length(lin2$b_vec), "%d", "state variables after contact of M2")
-guide_number("m2_n_past", st$n_past, "%d", "past inputs of spinal_settings_m2() for model_m2() with its default arguments")
+guide_number("m2_n_past", st$n_past, "%d", "past inputs of predictor_settings_m2() for model_m2() with its default arguments")
 guide_number("m2_n_first", n_first, "%d", "smallest n with 0.923^n <= 1e-4")
 guide_number("m2_n_second", n_second, "%d", "smallest n with |J^n b| <= 1e-4 |b|, model_m2() with its default arguments")
 guide_number("m2_mu", mu, "%.3f", "largest eigenvalue modulus of the cycle map of model_m2() with its default arguments")
-guide_number("m2_n_own", spinal_n_past(lin2, rho = mu), "%d", "past inputs with rho set to the largest eigenvalue modulus of the configuration")
+guide_number("m2_n_own", predictor_n_past(lin2, rho = mu), "%d", "past inputs with rho set to the largest eigenvalue modulus of the configuration")
 guide_number("m2_n_nodes", length(st$d_grid), "%d", "nodes of the grid of M2 for a record of 600 steps")
 k2 <- as.numeric(sub("^k=", "", names(pred2$levels)))
-if (!isTRUE(all.equal(spinal_lambda_l_lsq(pred2), 2 * unname(coef(lm(pred2$levels ~ k2))[2])))) {
-  stop("spinal_lambda_l_lsq() was expected to equal twice the least-squares slope of the levels")
+if (!isTRUE(all.equal(predictor_lambda_l_lsq(pred2), 2 * unname(coef(lm(pred2$levels ~ k2))[2])))) {
+  stop("predictor_lambda_l_lsq() was expected to equal twice the least-squares slope of the levels")
 }
 guide_number("m2_n_transient", transient_cycles(m2), "%d", "transient cycles of model_m2() with its default arguments")
 guide_number("m2_n_total", n_total2, "%d", "values of the input of the example of M2, transient cycles included")
@@ -240,10 +254,10 @@ guide_number("m2_rank", pred2$initial_rank, "%d", "dimension on which the epochs
 guide_number("m2_n_levels", length(pred2$levels), "%d", "levels of the prediction of M2")
 guide_number("m2_y8", pred2$levels[["k=8"]], "%.3f", "level of M2 at 8 steps, uncorrelated input")
 guide_number("m2_y20", pred2$levels[["k=20"]], "%.3f", "level of M2 at 20 steps, uncorrelated input")
-guide_number("m2_lambda", spinal_lambda_l_lsq(pred2), "%.4f", "predicted long-term exponent of model_m2() with its default arguments for an uncorrelated input, per stride")
+guide_number("m2_lambda", predictor_lambda_l_lsq(pred2), "%.4f", "predicted long-term exponent of model_m2() with its default arguments for an uncorrelated input, per stride")
 # without initial_rank_tol, the matching of M2 stops in solve(); small call
 msg_singular <- msg_of(suppressWarnings(
-  predict_spinal_levels(lin2, cg2$gam, n_steps = 600, k_levels = 8:9, d_grid = c(2L, 50L),
+  predictor_levels(lin2, cg2$gam, n_steps = 600, k_levels = 8:9, d_grid = c(2L, 50L),
                         n_past = st$n_past, maps = st$maps, separation_step = 1L)))
 if (!grepl("^system is computationally singular", msg_singular)) stop("M2 without initial_rank_tol was expected to stop in solve()")
 
@@ -269,8 +283,8 @@ guide_number("d_phi", d_phi, "%.3f", "d of the fractionally integrated series wi
 show_error <- function(expr) {
   writeLines(strwrap(tryCatch(expr, error = conditionMessage), 78, exdent = 2))
 }
-show_error(predict_spinal_levels(lin, cg$gam[1:300], n_steps = n_keep))
-show_error(predict_spinal_levels(lin2, cg2$gam, n_steps = 600))
+show_error(predictor_levels(lin, cg$gam[1:300], n_steps = n_keep))
+show_error(predictor_levels(lin2, cg2$gam, n_steps = 600))
 
 ## ---- hidden: checks-errors ----
 # the other messages of the table of errors
@@ -286,11 +300,11 @@ expect_message(msg_of(match_fi_to_ar1(phi = 0.99, k_window = k_window)),
 expect_message(msg_of(ar1_autocorrelation(phi = 1, n_lags = 10)), "|phi| must be below 1")
 expect_message(msg_of(sample_autocovariance(u$values, n_lags = n_total + 1)),
                "n_lags exceeds the length of the series")
-expect_message(msg_of(spinal_settings_m2(lin, n_steps = 600)),
+expect_message(msg_of(predictor_settings_m2(lin, n_steps = 600)),
                "the settings of update 1 are those of M2")
-expect_message(msg_of(spinal_lambda_l_m1(list(levels = c("k=2" = 0, "k=3" = 0), period = 1))),
+expect_message(msg_of(predictor_lambda_l_m1(list(levels = c("k=2" = 0, "k=3" = 0), period = 1))),
                "subscript out of bounds")
 expect_message(msg_of(window_slope_half_log_v(fi_autocorrelation(0, 5), 4:8)),
                "NA/NaN/Inf in 'y'")
-expect_message(msg_of(spinal_n_past(lin2, rho = 0.5, tol = 1e-12, n_max = 20L)),
+expect_message(msg_of(predictor_n_past(lin2, rho = 0.5, tol = 1e-12, n_max = 20L)),
                "the norm condition does not hold up to n_max")

@@ -3,7 +3,7 @@
 # Produced by: written by the guide session of SIM-ACI (Claude Fable 5.2), a session started by
 #   the coordination session of SIM-ACI (Claude Fable 5.2), without a code-generation model
 # Adapted for the public repository of walkbench by the SP1.1 session of SIM-ACI
-#   (Claude Opus 5.5) on 2026-11-18: path of the package (.. in place of ../../testbed), folder of the driver, header and one line of session.txt; folder of the usage line (docs/ in place of
+#   (Claude Opus 5.5) on 2026-11-21: path of the package (.. in place of ../../testbed), folder of the driver, header and one line of session.txt; folder of the usage line (docs/ in place of
 #   docs/walkbench_guide/).
 # Date: 2026-11-12
 # Description: runs one example script of the guide block by block and writes what the guide
@@ -18,7 +18,7 @@
 #   session.txt). The messages of R are set to English. The package walkbench is loaded from
 #   the root folder of the repository with pkgload::load_all(), which does not write
 #   into that folder.
-# Dependencies: pkgload, utils; walkbench 0.6.2 in .. (deSolve, digest, jsonlite,
+# Dependencies: pkgload, utils; walkbench 0.7.0 in .. (deSolve, digest, jsonlite,
 #   MASS, RANN)
 # Input: scripts/00_guide_functions.R and the example script given as argument
 # Output: generated/<chapter>/: snippets/*.txt, output/*.txt, signatures/*.txt, numbers.tex,
@@ -52,8 +52,8 @@ dir.create(file.path(out_dir, "output"), showWarnings = FALSE)
 options(width = 80, warn = 1)
 start <- Sys.time()
 suppressMessages(load_all(package_path, quiet = TRUE))
-if (utils::packageVersion("walkbench") != "0.6.2") {
-  stop("the guide describes walkbench 0.6.2; the folder holds version ",
+if (utils::packageVersion("walkbench") != "0.7.0") {
+  stop("the guide describes walkbench 0.7.0; the folder holds version ",
        as.character(utils::packageVersion("walkbench")))
 }
 
